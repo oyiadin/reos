@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ post.title }} · {{ site.title }}
+{% endblock %}
+
+{% block main %}
+<article>
+    <h1 id="postTitle"><a href="#postTitle">{{ post.title }}</a></h1>
+    <p id="postInfo" class="info">{{ post.date }}{% for tag in tags %} · <a href="/tags/{{ tag }}" class="n g">{{ tag }}</a>{% endfor %} · {{ post.visits }} views</p>
+    <div id="postContent">{{ post.content }}</div>
+</article>
+{% endblock %}

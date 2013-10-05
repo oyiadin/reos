@@ -3,8 +3,9 @@
 {% block main %}
 {% for post in posts %}
 <article>
-    <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
+    <h1><a href="{{ post.url }}#postTitle">{{ post.title }}</a></h1>
     <p class="info">{{ post.date }}{% for tag in tags %} · <a href="/tags/{{ tag }}" class="n g">{{ tag }}</a>{% endfor %} · {{ post.visits }} views</p>
+    {{ post.content | limit(50) }}
     <hr/>
 </article>
 {% endfor %}
