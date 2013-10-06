@@ -31,6 +31,26 @@
 	margin:0 0 3px;
 	line-height:1em;
 }
+div#paginator {
+	overflow:hidden;
+}
+.paginator {
+	display:inline-block;
+	height:40px;
+	line-height:40px;
+	width:50%;
+	text-align:center;
+}
+.paginator.paginatorPrev {
+	float:left;
+}
+.paginator.paginatorNext {
+	float:right;
+}
+.paginator:hover {
+	background-color:gray;
+	color:white;
+}
 #footer a {
 	text-decoration:none;
 	color:gray;
