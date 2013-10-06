@@ -12,9 +12,9 @@ Tags Cloud
 <article>
     {% if tags and posts %}
     <ul>
-        {% for post in posts %}
+        {% for post in get_data(type="post", tags=tags, limit=0 %}
         <li>
-            <p>{% if post.metadata['date'] %}{{ post.metadata['date'] }}{% else %}{{ post.date }}{% endif %} - <a href="{{ post.url }}">{{ post.title }}</a></p>
+            <p>{% if post.metadata['date'] %}{{ post.metadata['date'] }}{% else %}{{ post.date }}{% endif %} · <a href="{{ post.url }}">{{ post.title }}</a></p>
         </li>
         {% endfor %}
     </ul>
@@ -23,7 +23,7 @@ Tags Cloud
     {% for tag_name, tag_count in site.tags %}
     <h2>{{ tag_name }}({{ tag_count }})</h2>
     <ul>
-        {% for post in get_data(type="post", tags=tag_name) %}
+        {% for post in get_data(type="post", tags=tag_name, limit=tag_count) %}
         <li>
             <p>{% if post.metadata['date'] %}{{ post.metadata['date'] }}{% else %}{{ post.date }}{% endif %} · <a href="{{ post.url }}">{{ post.title }}</a></p>
         </li>
