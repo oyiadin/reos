@@ -58,3 +58,6 @@ div#paginator {
 #footer a:hover {
 	color:#3AA;
 }
+.toc {
+    padding:1em 1.5em;
+}
