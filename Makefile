@@ -15,4 +15,5 @@ clean_dir:
 
 clean:
 	rm -rf .sass-cache/
+	rm -rf static/.sass-cache/
 
