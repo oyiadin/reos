@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% if tags %}
+{{ ','.join(tags) }}
+{% else %}
+Tags Cloud
+{% endif %} · {{ site.title }}
+{% endblock %}
+
+{% block main %}
+<article>
+    {% if tags and posts %}
+    <h1>Tag - {{ ', '.join(tags) }}</h1>
+    <ul>
+        {% for post in get_data(type="post", tags=tags, limit=15) %}
+        <li>
+            <p>{% if post.metadata['date'] %}{{ post.metadata['date'] }}{% else %}{{ post.date }}{% endif %} · <a href="{{ post.url }}">{{ post.title }}</a></p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h1>Tags Cloud. </h1>
+    {% for tag_name, tag_count in site.tags %}
+    <h2>{{ tag_name }}({{ tag_count }})</h2>
+    <ul>
+        {% for post in get_data(type="post", tags=tag_name, limit=tag_count) %}
+        <li>
+            <p>{% if post.metadata['date'] %}{{ post.metadata['date'] }}{% else %}{{ post.date }}{% endif %} · <a href="{{ post.url }}">{{ post.title }}</a></p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+    {% endif %}
+</article>
+{% endblock %}

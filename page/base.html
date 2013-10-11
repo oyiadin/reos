@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+  <title>{% block title %}{{ site.title }}{% endblock %}</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="/t/main.css" />
+  <link rel="stylesheet" href="/t/base.css" />
+  <link rel="stylesheet" href="/t/pygments_style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<section id="main">
+		<section id="header">
+			<h1 id="title"><a href="http://{{ site.domain }}" class="n">{{ site.title }}</a></h1>
+			<p id="description">{{ site.raw_content }}</p>
+		</section>
+		<section id="content">
+            {% block main %}{% endblock %}
+		</section>
+		<section id="footer">
+			<p class="center sg"><a href="http://oyiadin.farbox.com/">Theme By Oyiadin</a> · <a href="/template">Clone template</a> · <a href="http://farbox.com">Powered By FarBox.com</a></p>
+		</section>
+	</section>
+</body>
