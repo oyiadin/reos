@@ -96,6 +96,13 @@ pre {
 	overflow:auto;
 	font-family:'Segoe UI Light','Segoe UI','Segoe UI WP','Microsoft Jhenghei','微软雅黑',sans-serif,Times;
 	word-break:initial;
+	margin:5px 0;
+}
+pre br {
+    display:none;
+}
+div.codehilite, pre {
+    line-height:1
 }
 hr {
 	margin-top:1em;

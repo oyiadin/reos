@@ -71,3 +71,25 @@ div#paginator {
 .ds-thread {
     padding-top:0.1em;
 }
+#comments {
+    .comment {
+        overflow:hidden;
+        pading-top:1.8em;
+        margin-top:1.5em;
+        border-top:1px dotted gray;
+    }
+    .comment_avatar, .comment_main {
+        display:inline-block;
+        float:left;
+    }
+    .comment_avatar {
+        width:10.4%;
+    }
+    .comment_main {
+        pading-left:1.2%;
+        width:88.4%;
+    }
+    .comment_info {
+        border-bottom:1px dotted #ccc;
+    }
+}
