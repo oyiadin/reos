@@ -10,22 +10,34 @@
 * 支持的评论系统：
     1. [Disqus](http://disqus.com/)
     2. [多说](http://duoshuo.com/)
+* 可自定义 CDN 地址。
 * 自适应单栏布局。
 
 额，没了，有什么建议请右上角发 Issues。
 
-## 其他说明 ##
+## 支持的配置选项 ##
 
-### 使用第三方评论系统 ###
+> 配置文件指的是 `FarBox/your_site/site.txt` 或 `FarBox/your_site/site.md`，比如我的配置文件在 `FarBox/oyiadin.farbox.com/site.txt`。
 
-请先至第三方评论系统准备评论系统的相关信息，在这里，reos 只需要你的 `short_name` 或者类似字段。编辑 `FarBox/your_site/site.txt` 文件，按需增加以下内容：
+### disqus 与 duoshuo ###
+
+这两个键是关于评论系统的，值应该为相应网站所提供的 `short_name`。当两者均出现时，将以 `disqus` 键优先处理。
+
+例子：
 
 ```text
-disqus: short_name
-duoshuo: short_name
+disqus: foobar
 ```
 
-如果使用 Disqus 系统，请添加第一行的内容；如果使用多说系统，请添加第二行的内容。并把其中的 `short_name` 更改为实际值。
+### cdn_path ###
 
-> 如果 site.txt 文件同时存在 disqus 及 duoshuo 字段，reos 将使用 disqus 作为评论系统。
+该键指定了静态文件（static 目录下文件）的存放地址，一般为 CDN 所使用。若无该键或者键值为空，静态文件将在 `/t/{ file_name }`。
+
+例子：该例会在 `http://foo.bar/` 处请求静态文件。
+
+```text
+cdn_path: http://foo.bar/
+```
+
+> 注意：cdn_path 的值应该**永远**以 `/` 结束。
 
