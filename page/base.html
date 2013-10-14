@@ -1,10 +1,12 @@
+{% from 'macro.html' import link %}
+
 <!DOCTYPE html>
 <head>
   <title>{% block title %}{{ site.title }}{% endblock %}</title>
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="/t/main.css" />
-  <link rel="stylesheet" href="/t/base.css" />
-  <link rel="stylesheet" href="/t/pygments_style.css" />
+  {{ link("main.css", "stylesheet") }}
+  {{ link("base.css", "stylesheet") }}
+  {{ link("pygments_style.css", "stylesheet") }}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>

@@ -1,0 +1,7 @@
+{% macro link(file, rel) -%}
+{% if site.configs['cdn_path'] %}
+<link rel="{{ rel }}" href="{{ site.config['cdn_path'] }}/{{ file }}" />
+{% else %}
+<link rel="{{ rel }}" href="/t/{{ file }}" />
+{% endif %}
+{%- endmacro %}
