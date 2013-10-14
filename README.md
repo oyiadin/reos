@@ -36,8 +36,8 @@ disqus: foobar
 例子：该例会在 `http://foo.bar/` 处请求静态文件。
 
 ```text
-cdn_path: http://foo.bar/
+cdn_path: http://foo.bar
 ```
 
-> 注意：cdn_path 的值应该**永远**以 `/` 结束。
+> 注意：cdn_path 的值应该**永远不**以 `/` 结束。
 
