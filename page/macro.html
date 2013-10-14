@@ -9,7 +9,6 @@
 {% endmacro %}
 
 
-
 {% macro comment() %}
 
 <!-- Comment Begin -->
@@ -67,7 +66,7 @@
 {% if comment_allowed %}
 
 <form class="comment_new" method="post" action="#comments">
-    <textarea name="content" rows=10>{{ comment_content }}</textarea?
+    <textarea name="content" rows=10>{{ comment_content }}</textarea>
     {% if error %}<p class="g comment_error">{{ error }}</p>{% endif %}
     <input type="text" name="author" value="Name" class="comment_new_input" />
     <input type="text" name="author" value="Email" class="comment_new_input" />
