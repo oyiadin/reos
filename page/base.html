@@ -2,25 +2,25 @@
 
 <!DOCTYPE html>
 <head>
-  <title>{% block title %}{{ site.title }}{% endblock %}</title>
-  <meta charset="utf-8" />
-  {{ link("main.css", "stylesheet") }}
-  {{ link("base.css", "stylesheet") }}
-  {{ link("pygments_style.css", "stylesheet") }}
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ site.title }}{% endblock %}</title>
+    <meta charset="utf-8" />
+    {{ link("main.css", "stylesheet") }}
+    {{ link("base.css", "stylesheet") }}
+    {{ link("pygments_style.css", "stylesheet") }}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<section id="main">
-		<section id="header">
-			<h1 id="title"><a href="http://{{ site.domain }}" class="n">{{ site.title }}</a></h1>
-			<p id="description">{{ site.raw_content }}</p>
-		</section>
-		<section id="content">
+    <section id="main">
+        <section id="header">
+            <h1 id="title"><a href="http://{{ site.domain }}" class="n">{{ site.title }}</a></h1>
+            <p id="description">{{ site.raw_content }}</p>
+        </section>
+        <section id="content">
             {% block main %}{% endblock %}
-		</section>
-		<section id="footer">
-			<p class="center sg"><a href="https://github.com/oyiadin/reos">Theme By Oyiadin</a> · <a href="/template">Clone template</a> · <a href="http://farbox.com">Powered By FarBox.com</a></p>
-		</section>
-	</section>
+        </section>
+        <section id="footer">
+            <p class="center sg"><a href="https://github.com/oyiadin/reos">Theme By Oyiadin</a> · <a href="/template">Clone template</a> · <a href="http://farbox.com">Powered By FarBox.com</a></p>
+        </section>
+    </section>
 </body>
 
