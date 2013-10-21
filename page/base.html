@@ -13,7 +13,7 @@
     <section id="main">
         <section id="header">
             <h1 id="title"><a href="http://{{ site.domain }}" class="n">{{ site.title }}</a></h1>
-            <p id="description">{{ site.raw_content }}</p>
+            {{ site.raw_content and  '<p id="description">{{ site.raw_content }}</p>' }}
         </section>
         <section id="content">
             {% block main %}{% endblock %}
