@@ -4,16 +4,14 @@
 
 ## 信息/特点/特性 ##
 
-* [HTML5 网页规范性测试通过。](http://validator.w3.org/check?uri=oyiadin.farbox.com)
-* 较好地支持移动终端。
-* 无 JavaScript 脚本。
-* 支持的评论系统：
+* [已通过 HTML5 网页规范性测试。](http://validator.w3.org/check?uri=oyiadin.farbox.com)
+* 支持移动终端（细节问题尚待解决）。
+* 无 JavaScript 脚本（不计第三方应用）。
+* 支持评论系统：
     1. [Disqus](http://disqus.com/)
     2. [多说](http://duoshuo.com/)
-* 可自定义 CDN 地址。
+* 可自定义静态文件存放位置（可用于 CDN）。
 * 自适应单栏布局。
-
-额，没了，有什么建议请右上角发 Issues。
 
 ## 支持的配置选项 ##
 
@@ -21,7 +19,7 @@
 
 ### disqus 与 duoshuo ###
 
-这两个键是关于评论系统的，值应该为相应网站所提供的 `short_name`。当两者均出现时，将以 `disqus` 键优先处理。
+这两个字段是关于评论系统的，值应该为相应网站所提供的 `short_name`。当两者均出现时，将以 `disqus` 优先处理。
 
 例子：
 
