@@ -21,6 +21,8 @@
         <section id="footer">
             <p class="center sg"><a href="https://github.com/oyiadin/reos">Theme By Oyiadin</a> · <a href="/template">Clone template</a> · <a href="http://farbox.com">Powered By FarBox.com</a></p>
         </section>
+        {% set custom_js = get_doc('custom_js.md', 'post') or get_doc('custom_js.txt', 'post') %}
+        {% if custom_js %}{{ custom_js.raw_content }}{% endif %}
     </section>
 </body>
 
