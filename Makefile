@@ -7,7 +7,9 @@ css:
 	cp static/readme.txt template/readme.txt
 
 html:
-	cp page/* template/
+	python compress_html.py
+	mv page/compressed/* template/
+	rm -rf page/compressed
 
 clean_dir:
 	rm -rf template/
