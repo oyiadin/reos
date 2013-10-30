@@ -10,32 +10,20 @@
 * 支持评论系统：
     1. [Disqus](http://disqus.com/)
     2. [多说](http://duoshuo.com/)
-* 可自定义静态文件存放位置（可用于 CDN）。
 * 自适应单栏布局。
 
-## 支持的配置选项 ##
+## 配置选项 ##
 
-> 配置文件指的是 `FarBox/your_site/site.txt` 或 `FarBox/your_site/site.md`，比如我的配置文件在 `FarBox/oyiadin.farbox.com/site.txt`。
+* `disqus` - 使用 disqus 作为评论系统，值为 disqus 提供的 `short_name`。
+* `duoshuo` - 使用多说作为评论系统，值为多说提供的`网站名称`。（`disqus` 比 `duoshuo` 字段优先）
+* `static_path` - 静态文件地址，默认为 `/t`。应不以 `/` 结束。可用作 CDN。
 
-### disqus 与 duoshuo ###
+## 添加自定义内容 ##
 
-这两个字段是关于评论系统的，值应该为相应网站所提供的 `short_name`。当两者均出现时，将以 `disqus` 优先处理。
-
-例子：
-
-```text
-disqus: foobar
-```
-
-### cdn_path ###
-
-该键指定了静态文件（static 目录下文件）的存放地址，一般为 CDN 所使用。若无该键或者键值为空，静态文件将在 `/t/{ file_name }`。
-
-例子：该例会在 `http://foo.bar/` 处请求静态文件。
+可以在文件 `custom_js.md` 处添加，注意第一行要是：
 
 ```text
-cdn_path: http://foo.bar
+status:part
 ```
 
-> 注意：cdn_path 的值应该**永远不**以 `/` 结束。
-
+这里可以添加 `JavaScript`、`css` 等东西，只要能在 HTML 里出现就行。
