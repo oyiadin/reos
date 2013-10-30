@@ -3,8 +3,8 @@
     <title>{% block title %}{{ site.title }}{% endblock %}</title>
     <meta charset="utf-8" />
     {% for _file in ['main.css', 'base.css', 'pygments_style.css'] %}
-    {% if site.configs['cdn_path'] %}
-    <link rel="stylesheet" href="{{ site.configs['cdn_path'] }}/{{ _file }}" />
+    {% if site.configs['static_path'] %}
+    <link rel="stylesheet" href="{{ site.configs['static_path'] }}/{{ _file }}" />
     {% else %}
     <link rel="stylesheet" href="/t/{{ _file }}" />
     {% endif %}
