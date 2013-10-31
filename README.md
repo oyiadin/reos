@@ -17,6 +17,7 @@
 * `disqus` - 使用 disqus 作为评论系统，值为 disqus 提供的 `short_name`。
 * `duoshuo` - 使用多说作为评论系统，值为多说提供的`网站名称`。（`disqus` 比 `duoshuo` 字段优先）
 * `static_path` - 静态文件地址，默认为 `/t`。应不以 `/` 结束。可用作 CDN。
+* `google_site_verification` - Google 站长工具验证的方法之一。请在验证页依次点击“备用方法”、“HTML 标记”以获取验证代码。值类似于这样：`vSuH7JKA3TQrLt0wY0jwcmMFb9jA44RJJ4DLZ-3PZt0`。
 
 ## 添加自定义内容 ##
 
@@ -26,4 +27,4 @@
 status:part
 ```
 
-这里可以添加 `JavaScript`、`css` 等东西，只要能在 HTML 里出现就行。
+这里可以添加 `JavaScript`、`css` 等东西，只要能在 HTML 里出现就行。它们将会在页脚出现。

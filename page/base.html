@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="/t/{{ _file }}" />
     {% endif %}
     {% endfor %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% if site.configs['google_site_verification'] %}
+    <meta name="google-site-verification" content="{{ site.configs['google_site_verification'] }}" />
+    {% endif %}
 </head>
 <body>
     <section id="main">
