@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% from 'macro.html' import get_date %}
 
 {% block main %}
 {% for post in posts %}
 <article>
     <h1><a href="{{ post.url }}#postTitle">{{ post.title }}</a></h1>
     <p class="info">
-        {% if post.metadata['date'] %}{{ post.metadata['date'] }}{% else %}{{ post.date }}{% endif %}
+        {{ get_date(post) }}
         {% for tag in post.tags %} · <a href="/tags/{{ tag }}" class="n g">{{ tag }}</a>{% endfor %} · 
         {{ post.visits }} views
         {% if site.configs['disqus'] %} · <a href="{{ post.url }}#disqus_thread" class="n g">Comments</a>{% endif %}

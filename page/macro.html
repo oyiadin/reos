@@ -68,3 +68,13 @@
 <!-- Comment End -->
 
 {% endmacro %}
+
+{% macro get_date(post) %}
+
+{# Output example: Oct. 31, 2013 (Thu.) #}
+{% if post.metadata['date'] %}
+{{ post.metadata['date'] | date("%b. %d, %Y (%a.)") }}
+{% else %}
+{{ post.date | date("%b. %d, %Y (%a.)") }}{% endif %}
+
+{% endmacro %}
