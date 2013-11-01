@@ -1,4 +1,4 @@
-all: clean_dir css html clean
+all: clean_dir css html xml clean
 
 css:
 	sass -t compressed static/main.scss template/main.css
@@ -10,6 +10,9 @@ html:
 	python compress_html.py
 	mv page/compressed/* template/
 	rm -rf page/compressed
+
+xml:
+	cp page/sitemap.html template/
 
 clean_dir:
 	rm -rf template/
