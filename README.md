@@ -28,3 +28,9 @@ status:part
 ```
 
 这里可以添加 `JavaScript`、`css` 等东西，只要能在 HTML 里出现就行。它们将会在页脚出现。
+
+## 占用的目录 ##
+
+* `/sitemap` - 此处会返回一个正规的sitemap文件。
+* `/feed` - 此处可用以rss订阅。（[#18](https://github.com/oyiadin/reos/issues/18) 尚未实现）
+
