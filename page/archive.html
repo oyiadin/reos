@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Archive · {{ site.title }}
+{% endblock %}
+
+{% block main %}
+<archive>
+    <h1>Archive · {{ site.title }}</h1>
+    <ul>
+    {% for post in get_data(type='post', limit=25) %}
+        <li>
+            <p>{{ post.date | date("%Y-%m-%d") }} · <a href="{{ post.url }}">{{ post.title }}</a></p>
+        </li>
+    {% endfor %}
+    </ul>
+</archive>
+{% set paginator = get_paginator(0) %}
+{% if paginator.has_previous or paginator.has_next %}
+<div id="paginator">
+    {% if paginator.has_previous %}
+    <a class="paginator paginatorPrev n" href="{{ paginator.previous_page_url }}" title="Previous">&lt;--</a>
+    {% endif %}
+    {% if paginator.has_next %}
+    <a class="paginator paginatorNext n" href="{{ paginator.next_page_url }}" title="Next">--&gt;</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
