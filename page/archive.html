@@ -15,15 +15,4 @@ Archive · {{ site.title }}
     {% endfor %}
     </ul>
 </archive>
-{% set paginator = get_paginator(0) %}
-{% if paginator.has_previous or paginator.has_next %}
-<div id="paginator">
-    {% if paginator.has_previous %}
-    <a class="paginator paginatorPrev n" href="{{ paginator.previous_page_url }}" title="Previous">&lt;--</a>
-    {% endif %}
-    {% if paginator.has_next %}
-    <a class="paginator paginatorNext n" href="{{ paginator.next_page_url }}" title="Next">--&gt;</a>
-    {% endif %}
-</div>
-{% endif %}
 {% endblock %}

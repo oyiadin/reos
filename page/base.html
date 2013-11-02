@@ -22,12 +22,29 @@
         </section>
         <section id="content">
             {% block main %}{% endblock %}
+            {% block pageinator %}
+            {% set paginator = get_paginator(0) %}
+            {% if paginator.has_previous or paginator.has_next %}
+            <div id="paginator">
+                {% if paginator.has_previous %}
+                <a class="paginator paginatorPrev n" href="{{ paginator.previous_page_url }}" title="Previous">&lt;--</a>
+                {% endif %}
+                {% if paginator.has_next %}
+                <a class="paginator paginatorNext n" href="{{ paginator.next_page_url }}" title="Next">--&gt;</a>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% endblock %}
         </section>
         <section id="footer">
-            <p class="center sg"><a href="https://github.com/oyiadin/reos">Theme By Oyiadin</a> · <a href="/template">Clone template</a> · <a href="http://farbox.com">Powered By FarBox.com</a></p>
+            <p class="center sg">
+                <a href="https://github.com/oyiadin/reos">Theme By Oyiadin</a> · 
+                <a href="/template">Clone template</a> · 
+                <a href="http://farbox.com">Powered By FarBox.com</a>
+            </p>
+            {% set custom_js = get_doc('custom_js.md', 'post') or get_doc('custom_js.txt', 'post') %}
+            {% if custom_js %}{{ custom_js.raw_content }}{% endif %}
+            {% block footer %}{% endblock %}
         </section>
-        {% set custom_js = get_doc('custom_js.md', 'post') or get_doc('custom_js.txt', 'post') %}
-        {% if custom_js %}{{ custom_js.raw_content }}{% endif %}
     </section>
 </body>
-

@@ -14,20 +14,21 @@
     <hr/>
 </article>
 {% endfor %}
-{% if paginator.has_previous or paginator.has_next %}
-<div id="paginator">
-    {% if paginator.has_previous %}
-    <a class="paginator paginatorPrev n" href="{{ paginator.previous_page_url }}" title="Previous">&lt;--</a>
-    {% endif %}
-    {% if paginator.has_next %}
-    <a class="paginator paginatorNext n" href="{{ paginator.next_page_url }}" title="Next">--&gt;</a>
-    {% endif %}
-</div>
-{% endif %}
+{% endblock %}
+
+{% block footer %}
 {% if site.configs['disqus'] %}
 <script type="text/javascript">
     var disqus_shortname = '{{ site.configs['disqus'] }}';
-    (function(){var s=document.createElement('script');s.async=true;s.type='text/javascript';s.src='//'+disqus_shortname+'.disqus.com/count.js';(document.getElementsByTagName('HEAD')[0]||document.getElementsByTagName('BODY')[0]).appendChild(s);}());
+    (function() {
+        var s = document.createElement('script');
+        s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (
+            document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]
+        ).appendChild(s);
+    }());
 </script>
 {% endif %}
 {% endblock %}
