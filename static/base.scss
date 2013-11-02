@@ -106,3 +106,10 @@ div#paginator {
         width:10%;
     }
 }
+
+
+@media screen and (max-width:500px) {
+    .tags, #tags, .views, #views {
+        display:none;
+    }
+}
