@@ -1,4 +1,4 @@
-all: clean_dir css html xml txt clean
+all: clean_dir css html xml clean
 
 css:
 	sass -t compressed static/main.scss template/main.css
