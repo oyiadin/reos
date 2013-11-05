@@ -1,3 +1,16 @@
+{% set path =  request.path.strip('/') %}{#
+
+#}{% if path == 'robots.txt' %}{#
+#}{{ set_content_type('text/plain') }}{#
+#}# Because of FarBox API, I cannot handle the path '/robots.txt' by normal way.
+# So, as you can see... In fact, this page is a 404 page...
+# ...And `status` is 404, too......
+
+User-agent: *
+Disallow: /t/*
+Disallow: /feed{#
+
+#}{% else %}
 {% extends 'base.html' %}
 
 {% block title %}
@@ -17,3 +30,5 @@ Ouch! HTTP 404!
 
 <p class="center"><a href="/archive">( Or Archive Page? )</a></p>
 {% endblock %}
+
+{% endif %}
