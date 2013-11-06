@@ -14,6 +14,7 @@
 
 ## 配置选项 ##
 
+* `author` - 标明站点的作者。没有该字段时会使用 `title` 替代。
 * `disqus` - 使用 disqus 作为评论系统，值为 disqus 提供的 `short_name`。
 * `duoshuo` - 使用多说作为评论系统，值为多说提供的`网站名称`。（`disqus` 比 `duoshuo` 字段优先）
 * `static_path` - 静态文件地址，默认为 `/t`。应不以 `/` 结束。可用作 CDN。
