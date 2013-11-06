@@ -5,6 +5,17 @@
 {{ post.title }} · {{ site.title }}
 {% endblock %}
 
+{% block meta %}
+<meta name="description" content="
+    {% if post.title|length > 30 %}
+    {{ post.title[:30] }}...
+    {% else %}
+    {{ post.title }}" />
+    {# 如果使用post.raw_content，会乱死，而且无法判断关键字句。 #}
+<meta name="keywords" content="
+    {{ ','.join(post.tags[:10]) }}" />
+{% endblock %}
+
 {% block main %}
 <article>
     <h1 id="postTitle"><a href="#postTitle">{{ post.title }}</a></h1>

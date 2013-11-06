@@ -10,6 +10,20 @@
     {% endif %}
     {% endfor %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="
+        {% if site.configs['author'] %}
+        {{ site.configs['author'] }}
+        {% else %}
+        {{ site.title }}
+        {% endif %}
+        " />
+    {% block meta %}
+    <meta name="description" content="{{ site.raw_content }}" />
+    <meta name="keywords" content="{{ site.title }}
+        {% for tag in site.tags[:4] %}
+        ,{{ tag[0] }}
+        {% endfor %}" />
+    {% endblock %}
     {% if site.configs['google_site_verification'] %}
     <meta name="google-site-verification" content="{{ site.configs['google_site_verification'] }}" />
     {% endif %}
