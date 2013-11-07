@@ -18,8 +18,8 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="{{ post.title }}" />
-<meta name="twitter:description" content="{{ post.raw_content[:202] }}" />
-{# 这里不能用 post.raw_content|limit(80)。因为返回的内容将包含 HTML 代码。 #}
+<meta name="twitter:description" content="{{ html_to_text(post.content)[:202] }}" />
+{# 这样的返回值比post.raw_content优雅很多~ ^-^ #}
 
 {% if site.configs['twitter'] %}
 <meta name="twitter:creator" content="{{ site.configs['twitter'] }}" />
