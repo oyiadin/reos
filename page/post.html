@@ -14,7 +14,7 @@
     {% endif %}" />
     {# 如果使用post.raw_content，会乱死，而且无法判断关键字句。 #}
 <meta name="keywords" content="
-    {{ ','.join(post.tags[:10]) }}" />
+    {{ ','.join(post.tags[:6]) }}" />
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="{{ post.title }}" />
