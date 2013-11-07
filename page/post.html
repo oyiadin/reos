@@ -15,6 +15,20 @@
     {# 如果使用post.raw_content，会乱死，而且无法判断关键字句。 #}
 <meta name="keywords" content="
     {{ ','.join(post.tags[:10]) }}" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{ post.title }}" />
+<meta name="twitter:description" content="{{ post.raw_content[:202] }}" />
+{# 这里不能用 post.raw_content|limit(80)。因为返回的内容将包含 HTML 代码。 #}
+
+{% if site.configs['twitter'] %}
+<meta name="twitter:creator" content="{{ site.configs['twitter'] }}" />
+{% endif %}
+
+{% if post.cover %}
+<meta name="twitter:image:src" content="{{ post.cover }}" />
+{% endif %}
+
 {% endblock %}
 
 {% block main %}
