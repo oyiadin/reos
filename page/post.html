@@ -16,6 +16,8 @@
 <meta name="keywords" content="
     {{ ','.join(post.tags[:6]) }}" />
 
+{% if site.configs['enable_twitter_cards'] %}
+
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="{{ post.title }}" />
 <meta name="twitter:description" content="{{ html_to_text(post.content)[:202] }}" />
@@ -27,6 +29,8 @@
 
 {% if post.cover %}
 <meta name="twitter:image:src" content="{{ post.cover }}" />
+{% endif %}
+
 {% endif %}
 
 {% endblock %}
