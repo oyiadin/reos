@@ -8,8 +8,8 @@
 * 支持移动终端（细节问题尚待解决）。
 * 无 JavaScript 脚本（不计第三方应用）。
 * 支持评论系统：
-    1. [Disqus](http://disqus.com/)
-    2. [多说](http://duoshuo.com/)
+    * [Disqus](http://disqus.com/)
+    * [多说](http://duoshuo.com/)
 * 自适应单栏布局。
 
 ## 配置选项 ##
@@ -19,6 +19,7 @@
 * `duoshuo` - 使用多说作为评论系统，值为多说提供的`网站名称`。（`disqus` 比 `duoshuo` 字段优先）
 * `static_path` - 静态文件地址，默认为 `/t`。应不以 `/` 结束。可用作 CDN。
 * `enable_twitter_cards` - 具体见 [Twitter Cards](#twitter-cards) 一节。
+* `twitter` - Twitter 帐号名。当前只会在 Twitter Cards 的 creator 标记中使用。
 * `google_site_verification` - Google 站长工具验证的方法之一。请在验证页依次点击“备用方法”、“HTML 标记”以获取验证代码。值类似于这样：`vSuH7JKA3TQrLt0wY0jwcmMFb9jA44RJJ4DLZ-3PZt0`。
 * `baidu_site_verification` - 百度站长工具的验证方法之一。请在验证页依次点击“验证网站”、“html标签验证”以获取验证代码。值类似于这样：`txu5eJ4r1C`。
 
@@ -40,14 +41,14 @@ status:part
 
 ## Twitter Cards ##
 
-（#25）
-
 本主题支持 Twitter Cards 元标记，要使用请先至配置文件添加一行：
 
 ```text
 enable_twitter_cards: yes
 ```
 
-这时 reos 就会在**文章页面**头部添加 Twitter Card 元标记。在这之后，你还需要向 Twitter 官方申请批准，地址[在此]。申请批准之后，你的 Twitter Cards 就生效了。下面是一个效果图：
+这时 reos 就会在**文章页面**头部添加 Twitter Card 元标记。在这之后，你还需要向 Twitter 官方申请批准，地址[在此](https://dev.twitter.com/docs/cards/validation/validator)。申请批准之后，你的 Twitter Cards 就生效了。下面是一个效果图：
 
 ![Twitter Cards 效果图](http://oyiadin.u.qiniudn.com/img/twitter-cards-example.png)
+
+[（Issue #25）](https://github.com/oyiadin/reos/issues/25)
