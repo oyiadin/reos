@@ -16,7 +16,7 @@
 <meta name="keywords" content="
     {{ ','.join(post.tags[:6]) }}" />
 
-{% if site.configs['enable_twitter_cards'] %}
+{% if site.configs['enable_twitter_cards'] == True %}
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="{{ post.title }}" />
