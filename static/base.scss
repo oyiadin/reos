@@ -107,6 +107,14 @@ div#paginator {
         width:10%;
     }
 }
+.error_404 {
+    background-color:black;
+    color:green;
+    width:98%;
+    padding:0.8em 1em;
+    overflow:auto;
+    line-height:1.6;
+}
 
 
 @media screen and (max-width:500px) {

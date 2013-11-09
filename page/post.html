@@ -1,7 +1,6 @@
 {% if not post %}
 
-{'error': 'unknown post name'}
-{{ redirect('/404' + request.path) }}
+{% include '404.html' %}
 
 {% else %}
 
