@@ -45,10 +45,10 @@
             {% if paginator.has_previous or paginator.has_next %}
             <div id="paginator">
                 {% if paginator.has_previous %}
-                <a class="paginator paginatorPrev n" href="{{ paginator.previous_page_url }}" title="Previous">&lt;--</a>
+                <a class="paginator paginatorPrev n" href="{{ paginator.previous_page_url }}" title="Previous" rel="prev">&lt;--</a>
                 {% endif %}
                 {% if paginator.has_next %}
-                <a class="paginator paginatorNext n" href="{{ paginator.next_page_url }}" title="Next">--&gt;</a>
+                <a class="paginator paginatorNext n" href="{{ paginator.next_page_url }}" title="Next" rel="next">--&gt;</a>
                 {% endif %}
             </div>
             {% endif %}
