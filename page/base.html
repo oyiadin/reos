@@ -56,12 +56,21 @@
         </section>
         <section id="footer">
             <p class="center">
+                {% set footer =  get_doc('footer.md', 'post') or get_doc('footer.txt', 'post') %}
+                {% if not footer %}
                 <a href="https://github.com/oyiadin/reos">Theme By Oyiadin</a> · 
                 <a href="/template">Clone template</a> · 
                 <a href="http://farbox.com">Powered By FarBox.com</a>
+                {% else %}
+                {{ footer.raw_content }}
+                {% endif %}
             </p>
             {% set custom_js = get_doc('custom_js.md', 'post') or get_doc('custom_js.txt', 'post') %}
-            {% if custom_js %}{{ custom_js.raw_content }}{% endif %}
+
+            {% if custom_js %}
+            {{ custom_js.raw_content }}
+            {% endif %}
+
             {% block footer %}{% endblock %}
         </section>
     </section>
