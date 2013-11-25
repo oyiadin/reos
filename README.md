@@ -39,6 +39,31 @@ status:part
 * `/sitemap` - 返回一个正规的 sitemap 文件。
 * `/feed` - 可用以 rss 订阅。
 
+## 自定义页脚内容 ##
+
+同添加 js 代码差不多，reos 会读取 `footer.md` 文件以修改默认页脚信息。以下代码即为默认信息：
+
+```text
+status:part
+
+<a href="https://github.com/oyiadin/reos">Theme By Oyiadin</a> · <a href="/template">Clone template</a> · <a href="http://farbox.com">Powered By FarBox.com</a>
+```
+
+如果想使用 Markdown 进行解析的话，请添加一个名为 markdown 的 Metadata：
+
+```text
+status:part
+markdown:true
+
+[Theme By Oyiadin][_1] · [Clone template][_2] · [Powered By FarBox.com][_3]
+
+[_1]: <https://github.com/oyiadin/reos>
+[_2]: </template>
+[_3]: <http://farbox.com>
+```
+
+效果依旧相同，但是对于我们易读了许多。
+
 ## Twitter Cards ##
 
 本主题支持 Twitter Cards 元标记，要使用请先至配置文件添加一行：
