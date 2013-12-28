@@ -5,13 +5,14 @@
 {% else %}
 
 {% extends 'base.html' %}
-{% from 'macro.html' import comment %}
+{% from 'macro.html' import comment, render_password_form %}
 
 {% block title %}
 {{ post.title }} · {{ site.title }}
 {% endblock %}
 
 {% block meta %}
+
 <meta name="description" content="
     {% if post.title|length > 30 %}
     {{ post.title[:30] }}...
@@ -26,8 +27,13 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="{{ post.title }}" />
-<meta name="twitter:description" content="{{ html_to_text(post.content)[:202] }}" />
-{# 这样的返回值比post.raw_content优雅很多~ ^-^ #}
+<meta name="twitter:description" content="
+    {% if not post.metadata('password') %}
+    {{ html_to_text(post.content)[:202] }}
+    {# 这样的返回值比post.raw_content优雅很多~ ^-^ #}
+    {% else %}
+    访问该文章需要密码。
+    {% endif %}" />
 
 {% if site.configs['twitter'] %}
 <meta name="twitter:creator" content="{{ site.configs['twitter'] }}" />
@@ -38,6 +44,12 @@
 {% endif %}
 
 {% endif %}
+
+<style>
+input[type=submit] {
+    padding:0.2em;
+}
+</style>
 
 {% endblock %}
 
@@ -53,7 +65,27 @@
             {{ post.visits }} views
         </span>
     </p>
-    <div id="postContent">{{ post.content }}</div>
+    <div id="postContent">
+        {% if not post.metadata['password'] %}
+        {{ post.content }}
+
+        {% else %}
+
+        {% if request.form['password']|string == post.metadata['password']|string %}
+        {{ post.content }}
+
+        {% else %}
+
+        {% if request.form['password']|string %}
+        <p>密码错误，请重试。</p>
+        {% endif %}
+
+        {{ render_password_form() }}
+
+        {% endif %}
+
+        {% endif %}
+    </div>
     <div class="eof" class="g s" title="End Of File">· EOF ·</div>
     {{ comment() }}
 </article>

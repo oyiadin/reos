@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% from 'macro.html' import comment, render_password_form %}
+
 {% block main %}
 {% for post in posts %}
 <article>
@@ -14,7 +16,11 @@
         </span>
         {% if site.configs['disqus'] %} · <a href="{{ post.url }}#disqus_thread" class="n g">Comments</a>{% endif %}
     </p>
+    {% if not post.metadata['password'] %}
     {{ post.content | limit(80) }}
+    {% else %}
+    {{ render_password_form(post.url) }}
+    {% endif %}
     <hr/>
 </article>
 {% endfor %}

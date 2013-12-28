@@ -68,3 +68,20 @@
 <!-- Comment End -->
 
 {% endmacro %}
+
+
+{% macro render_password_form(url='') %}
+
+{% if url %}
+<p>该文章已加密码，请进入该文章页面进行密码验证。</p>
+
+{% else %}
+<form method="post" action>
+    <label for="password">访问该文章需要输入密码：</label>
+    <input type="password" name="password" id="password" />
+    <input type="submit" value="点击验证密码" />
+</form>
+
+{% endif %}
+
+{% endmacro %}
