@@ -15,6 +15,7 @@ html:
 
 xml:
 	cp page/sitemap.html template/
+	cp page/feed.html template/
 
 clean_dir:
 	rm -rf template/
