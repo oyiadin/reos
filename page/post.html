@@ -5,7 +5,7 @@
 {% else %}
 
 {% extends 'base.html' %}
-{% from 'macro.html' import comment, render_password_form %}
+{% from 'macro.html' import comment, render_password_block %}
 
 {% block title %}
 {{ post.title }} · {{ site.title }}
@@ -80,7 +80,7 @@ input[type=submit] {
         <p>密码错误，请重试。</p>
         {% endif %}
 
-        {{ render_password_form() }}
+        {{ render_password_block() }}
 
         {% endif %}
 

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% from 'macro.html' import comment, render_password_form %}
+{% from 'macro.html' import comment, render_password_block %}
 
 {% block main %}
 {% for post in posts %}
@@ -19,7 +19,7 @@
     {% if not post.metadata['password'] %}
     {{ post.content | limit(80) }}
     {% else %}
-    {{ render_password_form(post.url) }}
+    {{ render_password_block(no_form=True) }}
     {% endif %}
     <hr/>
 </article>

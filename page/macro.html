@@ -70,9 +70,9 @@
 {% endmacro %}
 
 
-{% macro render_password_form(url='') %}
+{% macro render_password_block(no_form=False) %}
 
-{% if url %}
+{% if no_form %}
 <p>该文章已加密码，请进入该文章页面进行密码验证。</p>
 
 {% else %}
