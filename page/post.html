@@ -28,7 +28,7 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="{{ post.title }}" />
 <meta name="twitter:description" content="
-    {% if not post.metadata('password') %}
+    {% if not post.metadata['password'] %}
     {{ html_to_text(post.content)[:202] }}
     {# 这样的返回值比post.raw_content优雅很多~ ^-^ #}
     {% else %}
