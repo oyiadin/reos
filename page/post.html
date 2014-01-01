@@ -15,7 +15,7 @@
 
 <meta name="description" content="
     {% if not post.metadata['password'] %}
-    {% set splited = html_to_text(post.content).split('。') }
+    {% set splited = html_to_text(post.content).split('。') %}
     {% set content = '。'.join(splited[:5]) %}
 
     {% if splited|length > 5 %}
