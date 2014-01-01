@@ -27,24 +27,32 @@
 
 ## 特殊内容 ##
 
-### 特殊地址 ###
-
 > **注意：这些内容对于 reos 有特殊的意义，请在撰写文章时不要使用本节列出的命名，防止造成输出代码混乱。**
 
 > 具体请在本页查找相关内容或查阅互联网上的相关信息。
 
+### 特殊地址 ###
+
 * /robots.txt - 由于 FarBox API 的原因，此处的 HTTP status 为 404。[#21](https://github.com/oyiadin/reos/issues/21)
 * /sitemap - 站点地图文件，需网站主自行至相关网站上报。
 * /feed - RSS（Atom）
+* /archive - 文章存档。
+* /post/(str) - 文章页。
+* /tags - 使用过的 tags 列表。
+* /tags/(str) - 被打上 (str) 标签的文章列表。
+* /404 - 404 页。
+* /page/(int) - 分页。
 
 ### 特殊文件 ###
 
 * custom_js.md
 * footer.md
+* site.md
 
 ### 特殊的 Metadata ###
 
 * password
+* *markdown*
 
 ## 为每个页面添加代码 ##
 
