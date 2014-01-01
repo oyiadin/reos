@@ -14,12 +14,21 @@
 {% block meta %}
 
 <meta name="description" content="
-    {% if post.title|length > 30 %}
-    {{ post.title[:30] }}...
-    {% else %}
-    {{ post.title }}
-    {% endif %}" />
-    {# 如果使用post.raw_content，会乱死，而且无法判断关键字句。 #}
+    {% set splited = html_to_text(post.content).split('。') }
+    {% set content = '。'.join(splited[:5]) %}
+
+    {% if splited|length > 5 %}
+    。
+    {# 防止句末缺了萌萌的句号=。= #}
+    {% endif %}
+
+    {{ content[:202] }}
+
+    {% if content|length > 202 %}
+    ...
+    {% endif %}
+
+    {# 取文章前五句话，以句号为界；且最多 202 字。 #}" />
 <meta name="keywords" content="
     {{ ','.join(post.tags[:6]) }}" />
 
