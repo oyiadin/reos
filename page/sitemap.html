@@ -24,9 +24,9 @@
         <priority>0.7</priority>
     </url>{% endfor %}{% for tag in site.tags %}
     <url>
-        <loc>http://{{ site.domain }}/tag/{{ tag[0] }}</loc>{# tag: [name, count] #}
+        <loc>http://{{ site.domain }}/tags/{{ tag[0] }}</loc>{# tag: [name, count] #}
         <lastmod>{{ get_date( get_data(type="post", tags=tag[0])[0] ) }}</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
+        <priority>0.4</priority>
     </url>{% endfor %}
 </urlset>
