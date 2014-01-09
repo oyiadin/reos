@@ -52,6 +52,7 @@
 ### 特殊的 Metadata ###
 
 * password
+* *status*
 * *markdown*
 
 ## 为每个页面添加代码 ##
@@ -105,6 +106,19 @@ password: 密码支持中文
 > [（Issue #38）](https://github.com/oyiadin/reos/issues/38)
 
 > 当前有一个不足之处是：若所输入的密码长度小于 5，则会导致默认评论系统输出 *min length of comment is 5!* 的提示。
+
+## 另一种私密文章（noindex） ##
+
+如果你想要发布一篇文章，它的链接不会在任何页面出现（自己贴的不算 >_<），而可以通过一个私有链接访问，那么你可以声明该文章的 `status` 为 `noindex`：
+
+```
+title: 有个怪蜀黍来我家了
+status: noindex
+
+真的，没骗你。
+```
+
+> （该功能可以与上节的添加密码配合使用。）
 
 ## Twitter Cards ##
 
