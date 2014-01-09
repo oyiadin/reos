@@ -1,3 +1,5 @@
+<!-- = = -->
+
 {% if not post %}
 
 {% include '404.html' %}
@@ -7,34 +9,29 @@
 {% extends 'base.html' %}
 {% from 'macro.html' import comment, render_password_block %}
 
+{% macro get_content() %}
+{% set content = html_to_text(post.content) %}
+{# 这样的返回值比 post.raw_content 优雅很多~ ^-^ #}
+
+{% if not post.metadata['password'] %}
+{{ content[:202] }}
+
+{% if content|length > 202 %}
+...
+{% endif %}
+
+{% else %}
+访问该文章需要密码验证。
+
+{% endif %}
+{% endmacro %}
+
 {% block title %}
 {{ post.title }} · {{ site.title }}
 {% endblock %}
 
 {% block meta %}
 
-<meta name="description" content="
-    {% if not post.metadata['password'] %}
-    {% set splited = html_to_text(post.content).split('。') %}
-    {% set content = '。'.join(splited[:5]) %}
-
-    {% if splited|length > 5 %}
-    。
-    {# 防止句末缺了萌萌的句号=。= #}
-    {% endif %}
-
-    {{ content[:202] }}
-
-    {% if content|length > 202 %}
-    ...
-    {% endif %}
-
-    {# 取文章前五句话，以句号为界；且最多 202 字。 #}
-
-    {% else %}
-    访问该文章需要密码。
-
-    {% endif %}" />
 <meta name="keywords" content="
     {{ ','.join(post.tags[:6]) }}" />
 
@@ -42,13 +39,7 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="{{ post.title }}" />
-<meta name="twitter:description" content="
-    {% if not post.metadata['password'] %}
-    {{ html_to_text(post.content)[:202] }}
-    {# 这样的返回值比post.raw_content优雅很多~ ^-^ #}
-    {% else %}
-    访问该文章需要密码。
-    {% endif %}" />
+<meta name="twitter:description" content="{{ get_content() }}" />
 
 {% if site.configs['twitter'] %}
 <meta name="twitter:creator" content="{{ site.configs['twitter'] }}" />
