@@ -1,10 +1,20 @@
-<!-- = = -->
+{% set is_noindex = get_data(type="post", status="noindex", url_path=get_request_path(), return_count=True) %}
 
-{% if not post %}
+{% if not post and not is_noindex %}
+{# 如果该文章的 status 不是 public 也不是 noindex #}
+{# 或者根本不存在 %}
+{# post 这个变量默认只取 status:public 的文章 #}
 
 {% include '404.html' %}
 
 {% else %}
+
+{% if is_noindex %}
+
+{# 如果该文章的 status 为 noindex，则 post 变量取不到，需特殊处理 #}
+{% set post = get_data(type="post", status="noindex", url_path=path)[0] %}
+
+{% endif %}
 
 {% extends 'base.html' %}
 {% from 'macro.html' import comment, render_password_block %}
