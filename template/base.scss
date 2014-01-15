@@ -1,0 +1,124 @@
+@import "vars";
+
+#main {
+    max-width:760px;
+    width:96%;
+    margin:0 auto;
+    padding:0 2%;
+}
+#header {
+    padding:50px 0;
+}
+
+#title {
+    line-height:1em;
+    margin-bottom:0.2em;
+
+    a {
+        color:black;
+    }
+
+    a:hover {
+        color:gray;
+    }
+}
+#description {
+    font-size:16px;
+    color:gray;
+    margin:0;
+    line-height:1em;
+}
+.info {
+    font-size:16px;
+    color:gray;
+    text-align:right;
+    margin:0 0 3px;
+    line-height:1em;
+}
+div#paginator {
+    overflow:hidden;
+}
+.paginator {
+    display:inline-block;
+    height:40px;
+    line-height:40px;
+    width:50%;
+    text-align:center;
+}
+.paginator.paginatorPrev {
+    float:left;
+}
+.paginator.paginatorNext {
+    float:right;
+}
+.paginator:hover {
+    background-color:gray;
+    color:white;
+}
+#footer {
+    font-size:12px;
+    a {
+        text-decoration:none;
+        color:gray;
+    }
+
+    a:hover {
+        color:#3AA;
+    }
+}
+.ds-thread {
+    padding-top:0.1em;
+}
+#comments {
+    padding-bottom:1.5em;
+    .comment {
+        overflow:hidden;
+        padding-top:1.8em;
+        margin-top:1.5em;
+        border-top:1px dotted gray;
+    }
+    .comment_avatar, .comment_main {
+        display:inline-block;
+        float:left;
+    }
+    .comment_avatar {
+        width:10.4%;
+    }
+    .comment_main {
+        padding-left:1.2%;
+        width:88.4%;
+    }
+    .comment_info {
+        border-bottom:1px dotted #ccc;
+    }
+    p {
+        margin-top:0;
+    }
+}
+.comment_new {
+    overflow:hidden;
+    .comment_new_input {
+        width:29%;
+        margin-right:1%;
+        display:inline-block;
+        float:left;
+    }
+    .comment_new_send {
+        width:10%;
+    }
+}
+.error_404 {
+    background-color:black;
+    color:green;
+    width:98%;
+    padding:0.8em 1em;
+    overflow:auto;
+    line-height:1.6;
+}
+
+
+@media screen and (max-width:500px) {
+    .tags, #tags, .views, #views {
+        display:none;
+    }
+}
