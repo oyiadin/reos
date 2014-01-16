@@ -1,0 +1,42 @@
+extends "base"
+
+block title
+    if tags
+        {{ ','.join(tags) }}
+    else
+        | Tags Cloud
+    | ·
+    site.title
+
+block main
+    article
+        if tags and posts
+            h1
+                | Tag
+                | ·
+                {{ ', '.join(tags) }}
+
+            ul
+                for post in get_data(type="post", tags=tags, limit=15)
+                    li
+                        p
+                            {{ post.date | date("%b %d, %Y (%a)") }}
+                            | ·
+                            a(href="{{ post.url }}")= post.title }}
+
+        else
+            h1 Tags Cloud.
+            for tag_name, tag_count in site.tags
+                h2
+                    tag_name
+                    | (
+                    tag_count
+                    | )
+
+                ul
+                    for post in get_data(type="post", tags=tag_name, limit=tag_count)
+                        li
+                            p
+                                {{ post.date | date("%Y-%m-%d") }}
+                                | ·
+                                a(href="{{ post.url }}")= post.title

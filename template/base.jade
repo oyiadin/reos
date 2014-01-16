@@ -1,0 +1,54 @@
+doctype html
+html
+    head
+        title
+            block title
+                site.title
+
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(name="author", content="{{ site.configs['author'] or site.title }}")
+
+        load("/t/main.scss?format=css /t/base.css?format=css /t/pygments_style.scss?format=css")
+        link(rel="alternate" type="application/rss+xml" href="/feed")
+
+        block meta
+
+        if site.configs['google_site_verification']
+            meta(name="google-site-verification" content="{{ site.configs['google_site_verification'] }}")
+        if site.configs['baidu_site_verification']
+            meta(name="baidu-site-verification" content="{{ site.configs['baidu_site_verification'] }}")
+
+    body
+        section#main
+            section#header
+                h1#title
+                    a.n(href="http://{{ site.domain }}")= site.title
+                if site.raw_content
+                    p#description= site.raw_content
+
+            section#content
+                block main
+
+                block paginator ================================================================================================================
+                    paginator = get_paginator(0)
+                    if paginator.has_previous or paginator.has_next
+                        div#paginator
+                            if paginator.has_previous
+                                a.paginator.paginatorPrev.n(href="{{ paginator.previous_page_url }}", title="Previous", rel="prev")= "<"
+                            if paginator.has_next
+                                a.paginator.paginatorNext.n(href="{{ paginator.next_page_url }}", title="Next", rel="next")= ">"
+
+            section#footer
+                div.center
+                    footer = get_doc('footer.md', 'post') or get_doc('footer.txt', 'post')
+                    if not footer
+                        a(href="https://github.com/oyiadin/reos")= "Theme By Oyiadin"
+                        | · 
+                        a(href="/template")= Clone template"
+                        | · 
+                        a(href="http://farbox.com")= "Powered By FarBox.com"
+                    else
+                        footer.raw_content
+
+                block footer

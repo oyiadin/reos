@@ -1,0 +1,21 @@
+extends "base"
+
+block title
+	| Archive
+	| ·
+	site.title
+
+block main
+	article
+	    h1
+	    	| Archive
+	    	| ·
+	    	site.title
+
+	    ul
+		    for post in get_data(type='post', limit=25)
+		       	li
+		            p
+		            	{{ post.date | date("%Y-%m-%d") }}
+		            	| ·
+		            	a(href="{{ post.url }}")= post.title

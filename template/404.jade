@@ -1,0 +1,50 @@
+extends "base"
+
+block title Error 404 - File Not Found
+
+block main
+    author = site.configs['author'] or site.configs['title']
+    location = site.configs['title']
+    path = request.path.split('/')[1:]
+    dir = '/'.join(path[:-1]) if path|length > 1
+
+    div.error_404"(contenteditable="")
+        author
+        | @
+        location
+        | :~/
+        dir
+        | $ git status
+
+        br
+
+        | #&nbsp;On branch master
+        br
+        | #&nbsp;Changes not staged for commit:
+        br
+        | #&nbsp;&nbsp;&nbsp;(use "git add/rm &lt;file&gt;..." to update what will be committed)
+        br
+        | #&nbsp;&nbsp;&nbsp;(use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+        br
+        
+        | #&nbsp;&nbsp;&nbsp;deleted:    
+        path[-1]
+
+        br
+
+        | no changes added to commit (use "git add" and/or "git commit -a")
+        br
+
+        author
+        | @
+        location
+        | :~/
+        dir
+        | $
+        a.n(href="/") cd /
+
+    hr
+
+    p.center
+        a(href="/archive")
+            | ( Or Archive Page? )
