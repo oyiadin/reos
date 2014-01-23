@@ -1,6 +1,6 @@
-extends "base"
+extends base
 
-from "macro" import comment, render_password_block
+from macro import comment, render_password_block
 
 block main
     for post in posts
@@ -17,7 +17,7 @@ block main
                         | ·
                 span.views
                     post.visits
-                    | views
+                    |  views
                 if site.configs['disqus']
                     | ·
                     a.n.g(href="{{ post.url }}#disqus_thread")= "Comments"

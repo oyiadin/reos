@@ -1,50 +1,29 @@
-path = get_request_path()
-is_noindex = get_data(type="post", status="noindex", url_path=path, return_count=True)
-
-if (not post) and (not is_noindex)
-    //- 如果该文章的 status 不是 public 也不是 noindex
-    //- 或者根本不存在
-    //- post 这个变量默认只取 status:public 的文章
-    raise_404()
-
-else
-    if is_noindex
-        //- 如果该文章的 status 为 noindex，则 post 变量取不到，需特殊处理
-        post = get_data(type="post", status="noindex", url_path=path)[0]
-
-extends "base"
-from "macro" import comment, render_password_block
+extends base
+from macro import comment, render_password_block
 
 macro get_content()
-    content = html_to_text(post.content)
-    //- 这样的返回值比 post.raw_content 优雅很多~ ^-^
-
     if not post.metadata['password']
-        {{ content[:202] }}
-
-        if content|length  202
-            ...
-
+        post.content.limit(200)
     else 访问该文章需要密码验证。
 
 block title
     post.title
-    | ·
-    site.title
+        | ·
+        site.title
 
 block meta
     meta(name="keywords", content="{{ ','.join(post.tags[:6]) }}")
 
     if site.configs['enable_twitter_cards'] == True
-        meta(name="twitter:card" content="summary")
-        meta(name="twitter:title" content="{{ post.title }}")
-        meta(name="twitter:description" content="{{ get_content() }}")
+        meta(name="twitter:card", content="summary")
+        meta(name="twitter:title", content="{{ post.title }}")
+        meta(name="twitter:description", content="{{ get_content() }}")
 
         if site.configs['twitter']
-            meta(name="twitter:creator" content="{{ site.configs['twitter'] }}")
+            meta(name="twitter:creator", content="{{ site.configs['twitter'] }}")
 
         if post.cover
-            meta( )name="twitter:image:src" content="{{ post.cover }}")
+            meta(name="twitter:image:src", content="{{ post.cover }}")
 
     style.
         input[type=submit] {
@@ -57,15 +36,15 @@ block main
             a(href="#postTitle")= post.title
 
         p.info#postInfo
-            {{ post.date | date("%b %d, %Y %H:%M (%a)") }}
-            | ·
+                {{ post.date | date("%b %d, %Y %H:%M (%a)") }}
+                | ·
             span#tags
                 for tag in post.tags
                     a.n.g(href="/tags/{{ tag }}")= tag
                     | ·
             span#views
                 post.visits
-                | views
+                |  views
 
         div#postContent
             if not post.metadata['password']
