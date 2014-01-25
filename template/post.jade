@@ -1,10 +1,5 @@
 extends base
-from macro import comment, render_password_block
-
-macro get_content()
-    if not post.metadata['password']
-        post.content.limit(200)
-    else 访问该文章需要密码验证。
+{% from "macro" import comment, render_password_block %}
 
 block title
     post.title
@@ -17,7 +12,10 @@ block meta
     if site.configs['enable_twitter_cards'] == True
         meta(name="twitter:card", content="summary")
         meta(name="twitter:title", content="{{ post.title }}")
-        meta(name="twitter:description", content="{{ get_content() }}")
+        meta(name="twitter:description", content="
+            {% if not post.metadata['password'] %}
+            {{ post.content.limit(200) }}
+            {% else %}访问该文章需要密码验证。{% endif %}")
 
         if site.configs['twitter']
             meta(name="twitter:creator", content="{{ site.configs['twitter'] }}")
@@ -36,8 +34,8 @@ block main
             a(href="#postTitle")= post.title
 
         p.info#postInfo
-                {{ post.date | date("%b %d, %Y %H:%M (%a)") }}
-                | ·
+            {{ post.date | date("%b %d, %Y %H:%M (%a)") }}
+            | ·
             span#tags
                 for tag in post.tags
                     a.n.g(href="/tags/{{ tag }}")= tag
@@ -58,8 +56,8 @@ block main
                     if request.form['password']|string
                         p 密码错误，请重试。
 
-                render_password_block()
+                {{ render_password_block() }}
 
         div.eof.g.s(title="End Of File") · EOF ·
 
-        comment()
+        {{ comment() }}
