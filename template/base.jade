@@ -1,4 +1,5 @@
 doctype html
+
 html
     head
         title
@@ -8,9 +9,10 @@ html
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(name="author", content="{{ site.configs['author'] or site.title }}")
 
-        load("/t/main.scss?format=css /t/base.scss?format=css /t/pygments_style.scss?format=css")
+        load("/t/main.scss /t/base.scss /t/pygments_style.scss")
 
         block meta
+        //- 一个空 block
 
         if site.configs['google_site_verification']
             meta(name="google-site-verification", content="{{ site.configs['google_site_verification'] }}")
@@ -21,7 +23,7 @@ html
         section#main
             section#header
                 h1#title
-                    a.n(href="http://{{ site.domain }}")= site.title
+                    a.n(href="//{{ site.domain }}")= site.title
                 if site.raw_content
                     p#description= site.raw_content
 
@@ -29,8 +31,7 @@ html
                 block main
 
                 block paginator
-                    paginator = get_paginator(0)
-                    if paginator.has_previous or paginator.has_next
+                    if paginator.has_pre or paginator.has_next
                         div#paginator
                             if paginator.has_previous
                                 a.paginator.paginatorPrev.n(href="{{ paginator.previous_page_url }}", title="Previous", rel="prev")= "<"
@@ -39,13 +40,13 @@ html
 
             section#footer
                 div.center
-                    footer = get_doc('footer.md', 'post') or get_doc('footer.txt', 'post')
+                    footer = get_doc('footer.md') or get_doc('footer.txt')
                     if not footer
-                        a(href="https://github.com/oyiadin/reos")= "Theme By Oyiadin"
+                        a(href="https://github.com/oyiadin/reos") Theme By Oyiadin
                         | · 
-                        a(href="/template")= "Clone template"
+                        a(href="/template") Clone template
                         | · 
-                        a(href="http://farbox.com")= "Powered By FarBox.com"
-                    else footer.raw_content
+                        a(href="//farbox.com") Powered By FarBox.com
+                    else= footer.content.plain
 
                 block footer

@@ -1,6 +1,7 @@
-extends "base"
+extends base
 
-block title Error 404 - File Not Found
+block title
+    | Error 404 - File Not Found
 
 block main
     author = site.configs['author'] or site.configs['title']
@@ -8,13 +9,10 @@ block main
     path = request.path.split('/')[1:]
     dir = '/'.join(path[:-1]) if path|length > 1
 
+    begin = author + "@" + location + ":~/" + dir + "$ "
+
     div.error_404"(contenteditable="")
-        author
-        | @
-        location
-        | :~/
-        dir
-        | $ git status
+        + begin + git status
 
         br
 
@@ -27,24 +25,17 @@ block main
         | #&nbsp;&nbsp;&nbsp;(use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
         br
         
-        | #&nbsp;&nbsp;&nbsp;deleted:    
-        path[-1]
+        + "#&nbsp;&nbsp;&nbsp;deleted:    " + path[-1]
 
         br
 
         | no changes added to commit (use "git add" and/or "git commit -a")
         br
 
-        author
-        | @
-        location
-        | :~/
-        dir
-        | $
+        + begin
         a.n(href="/") cd /
 
     hr
 
     p.center
-        a(href="/archive")
-            | ( Or Archive Page? )
+        a(href="/archive")= "( Or Archive Page? )"

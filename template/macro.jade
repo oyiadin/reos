@@ -1,4 +1,4 @@
-macro comment()
+macro comment(post)
     if site.configs['disqus']
         div#disqus_thread
         script(type="text/javascript").
@@ -10,11 +10,9 @@ macro comment()
                 dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
             })();
-        noscript
-            | Please enable JavaScript to view the
-            a(href="http://disqus.com/?ref_noscript")= comments powered by Disqus.
-        a.dsq-brlink(href="http://disqus.com")
-            | comments powered by
+        noscript Please enable JavaScript to view the
+            a(href="http://disqus.com/?ref_noscript") comments powered by Disqus.
+        a.dsq-brlink(href="http://disqus.com") comments powered by
             span.logo-disqus Disqus
 
     elif site.configs['duoshuo']
@@ -41,25 +39,24 @@ macro comment()
                             span.comment_author
                                 a.n(href="{{ comment.site or '#' }}")
                                     if comment.author
-                                        strong
-                                            comment.author
+                                        strong= comment.author
                                     else anonymous
                             span.comment_date
-                                {{ comment.date | date("%Y-%m-%d %H:%M:%S") }}
+                                +comment.date.format("%Y-%m-%d %H:%M:%S")
                         div.comment_content= comment.content
 
         if comment_allowed
             //- 表单的 POST 应该发到文章本页。
             form.comment_new(method="post", action="#comments")
-                textarea(name="content", rows="10")
-                    comment_content
+                textarea(name="content", rows="10")= comment_content
                 if error
-                    p.g.comment_error
-                        error
+                    p.g.comment_error= error
                     input.comment_new_input(type="text", name="author", value="Name")
                     input.comment_new_input(type="text", name="author", value="Email")
                     input.comment_new_input(type="text", name="author", value="Site")
                     input.comment_new_send(type="submit", value="OK")
+
+
 
 macro render_password_block(no_form=False)
     if no_form

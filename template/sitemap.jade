@@ -1,7 +1,7 @@
 doctype xml
 
 macro get_date(post)
-    post.date | date("%Y-%m-%dT%H:%M:%S+00:00")
+    post.date.format("%Y-%m-%dT%H:%M:%S+00:00")
 
 set_content_type('text/xml')
 
@@ -12,9 +12,7 @@ set_content_type('text/xml')
 
 urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     url
-        loc
-            | //
-            site.domain
+        loc= "//" + site.domain
         lastmod
             get_date(posts[0])
         changefreq weekly
@@ -22,21 +20,18 @@ urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
 
     for post in posts
         url
-            loc
-                | //
-                site.domain
-                post.url
+            loc= "//" + site.domain + post.url
             lastmod
                 get_date(post)
             changefreq monthly
             priority 0.7
 
     for tag in site.tags
-        //- tag: [name, count]
+        //- tag: [tag_name, tag_count]
         url
-            loc
-                | //site.domain/tags/tag[0]
+            loc= "//" + site.domain + "/tags/" + tag[0]
             lastmod
-                get_date(get_data(type="post", tags=tag[0])[0] )
+                get_date( get_data(type="post", tags=tag[0])[0] )
+                //- 取得被打上 tag_name 的最新文章的发表时间
             changefreq monthly
             priority 0.4

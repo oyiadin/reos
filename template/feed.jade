@@ -1,31 +1,24 @@
 doctype xml
 
 set_content_type('application/xml')
-from "macro.html" import render_password_block
++from macro.html import render_password_block
 
 feed(xmlns="http://www.w3.org/2005/Atom")
-	title
-		site.title
+	title= site.title
 	if site.raw_content
-		subtitle
-			site.raw_content
+		subtitle= site.raw_content
 	link(href="http://{{ site.domain }}")
 	link(rel="self", href="http://{{ site.domain }}/feed")
-	id
-		site.domain
+	id= site.domain
 	if posts
-		updated
-			{{ posts[0].date | date("%Y-%m-%dT%H:%M:%SZ") }}
+		updated= posts[0].date.format("%Y-%m-%dT%H:%M:%SZ")
 
 	for post in posts
 		entry
-			title
-				post.title
+			title= post.title
 			link(href="http://{{ site.domain }}{{ post.url }}", rel="alternate")
-			updated
-				{{ post.date | date("%Y-%m-%dT%H:%M:%SZ") }}
-			id
-				post.url_path
+			updated= post.date.format("%Y-%m-%dT%H:%M:%SZ")
+			id= post.url_path
 			author
 				name
 					if site.configs['author']
@@ -34,6 +27,6 @@ feed(xmlns="http://www.w3.org/2005/Atom")
 						site.title
 			summary(type="html")
 				if not post.metadata['password']
-					{{ post.content | escape }}
+					+post.content | escape
 				else
 					render_password_block(no_form=True)
