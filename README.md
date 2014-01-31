@@ -1,3 +1,13 @@
+## 号外！号外！ ##
+
+FarBox 正在预谋新版 API，其中添加了许多激动人心的新东西。目前还在 beta，一起期待！
+
+（然后我就入了坑，然后这个主题目前尚有一大堆一大堆的问题……）
+
+下面描述的内容可能已经失效。
+
+reos 能在新版 FarBox API 正常工作后更新 :)
+
 ## 描述 ##
 
 又一个 [FarBox.com](http://farbox.com) 主题，无设计宗旨，随心设计。Demo 及作者 Blog：[陈笔](http://oyiadin.farbox.com)。
