@@ -1,4 +1,4 @@
-doctype html
+﻿doctype html
 
 html
     head
@@ -34,9 +34,9 @@ html
                     if paginator.has_pre or paginator.has_next
                         div#paginator
                             if paginator.has_previous
-                                a.paginator.paginatorPrev.n(href="{{ paginator.previous_page_url }}", title="Previous", rel="prev")= "<"
+                                a.paginator.paginatorPrev.n(href="{{ paginator.previous_page_url }}", title="Previous", rel="prev")= "&lt;&lt;--"
                             if paginator.has_next
-                                a.paginator.paginatorNext.n(href="{{ paginator.next_page_url }}", title="Next", rel="next")= ">"
+                                a.paginator.paginatorNext.n(href="{{ paginator.next_page_url }}", title="Next", rel="next")= "--&gt;&gt;"
 
             section#footer
                 div.center

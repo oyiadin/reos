@@ -36,7 +36,9 @@ block main
                 for tag in post.tags
                     a.n.g(href="/tags/{{ tag }}")= tag
                     | ·
-            span#views= post.visits + " views"
+            span#views
+                {{ post.visits }}
+                |  views
 
         div#postContent
             if not post.metadata['password']

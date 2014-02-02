@@ -1,7 +1,7 @@
 doctype xml
 
-macro get_date(post)
-    post.date.format("%Y-%m-%dT%H:%M:%S+00:00")
+mixin get_date(post)
+    | {{ post.date.format("%Y-%m-%dT%H:%M:%S+00:00") }}
 
 set_content_type('text/xml')
 
@@ -14,7 +14,7 @@ urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     url
         loc= "//" + site.domain
         lastmod
-            get_date(posts[0])
+            +get_date(posts[0])
         changefreq weekly
         priority 1.0
 
@@ -22,7 +22,7 @@ urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
         url
             loc= "//" + site.domain + post.url
             lastmod
-                get_date(post)
+                +get_date(post)
             changefreq monthly
             priority 0.7
 
@@ -31,7 +31,7 @@ urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
         url
             loc= "//" + site.domain + "/tags/" + tag[0]
             lastmod
-                get_date( get_data(type="post", tags=tag[0])[0] )
+                +get_date( get_data(type="post", tags=tag[0])[0] )
                 //- 取得被打上 tag_name 的最新文章的发表时间
             changefreq monthly
             priority 0.4

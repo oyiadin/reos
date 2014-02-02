@@ -1,7 +1,7 @@
 doctype xml
 
 set_content_type('application/xml')
-+from macro.html import render_password_block
+{% from "macro" import render_password_block %}
 
 feed(xmlns="http://www.w3.org/2005/Atom")
 	title= site.title
@@ -22,11 +22,11 @@ feed(xmlns="http://www.w3.org/2005/Atom")
 			author
 				name
 					if site.configs['author']
-						site.configs['author']
+						{{ site.configs['author'] }}
 					else
 						site.title
 			summary(type="html")
 				if not post.metadata['password']
-					+post.content | escape
+					{{ post.content | escape }}
 				else
-					render_password_block(no_form=True)
+					+render_password_block(no_form=True)

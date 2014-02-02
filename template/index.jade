@@ -1,5 +1,5 @@
-extends base
-{% from "macro" import comment, render_password_block %}
+﻿extends base
+{% from "macro" import render_password_block %}
 
 block main
     for post in posts
@@ -12,11 +12,15 @@ block main
                     for tag in post.tags
                         a.n.g(href="/tags/{{ tag }}")= tag
                         | ·
-                span.views= post.visits + " views"
-                if site.configs['disqus'] · 
-                    a.n.g(href="{{ post.url }}#disqus_thread") Comments
+                span.views
+                    post.visits
+                    |  views
+                if site.configs['disqus']
+                    | · 
+                    a.n.g(href="{{ post.url }}#disqus_thread")= "Comments"
 
-            if not post.metadata['password']= post.content.limit(100)
+            if not post.metadata['password']
+                div= post.content.limit(100)
             else
                 +render_password_block(no_form=True)
 

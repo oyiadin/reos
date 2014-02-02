@@ -11,8 +11,8 @@ block main
 
     begin = author + "@" + location + ":~/" + dir + "$ "
 
-    div.error_404"(contenteditable="")
-        + begin + git status
+    div.error_404(contenteditable="")
+        {{ begin + "git status" }}
 
         br
 
@@ -25,14 +25,14 @@ block main
         | #&nbsp;&nbsp;&nbsp;(use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
         br
         
-        + "#&nbsp;&nbsp;&nbsp;deleted:    " + path[-1]
+        {{ "#&nbsp;&nbsp;&nbsp;deleted:    " + path[-1] }}
 
         br
 
         | no changes added to commit (use "git add" and/or "git commit -a")
         br
 
-        + begin
+        {{ begin }}
         a.n(href="/") cd /
 
     hr
