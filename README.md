@@ -1,20 +1,11 @@
-## 号外！号外！ ##
-
-FarBox 正在预谋新版 API，其中添加了许多激动人心的新东西。目前还在 beta，一起期待！
-
-（然后我就入了坑，然后这个主题目前尚有一大堆一大堆的问题……）
-
-下面描述的内容可能已经失效。
-
-reos 能在新版 FarBox API 正常工作后更新 :)
-
 ## 描述 ##
 
 又一个 [FarBox.com](http://farbox.com) 主题，无设计宗旨，随心设计。Demo 及作者 Blog：[陈笔](http://oyiadin.farbox.com)。
 
 ## 信息/特点/特性 ##
 
-* [通过 HTML5 网页规范性测试](http://validator.w3.org/check?uri=oyiadin.farbox.com)；
+* **本主题只适用于目前的 FarBox Beta 版本**；
+* [通过 HTML5 网页规范性测试](http://validator.w3.org/check?uri=oyiadin.farbox.com)（请无视百度站长验证那个谢谢）；
 * 支持移动终端（细节问题尚待解决）；
 * 无 JavaScript 脚本（不计第三方应用）；
 * 支持评论系统：
@@ -33,17 +24,13 @@ reos 能在新版 FarBox API 正常工作后更新 :)
 * `twitter` - Twitter 帐号名。当前只会在 Twitter Cards 的 creator 标记中使用。
 * `google_site_verification` - Google 站长工具验证的方法之一。请在 Google 的验证页依次点击“备用方法”、“HTML 标记”以获取验证代码。值类似于这样：`vSuH7JKA3TQrLt0wY0jwcmMFb9jA44RJJ4DLZ-3PZt0`。
 * `baidu_site_verification` - 百度站长工具的验证方法之一。请在百度的验证页依次点击“验证网站”、“html标签验证”以获取验证代码。值类似于这样：`txu5eJ4r1C`。
-* `static_path` - 静态文件地址，默认为 `/t`。应不以 `/` 结束。可用作 CDN。
 
 ## 特殊内容 ##
-
-> **注意：这些内容对于 reos 有特殊的意义，请在撰写文章时不要使用本节列出的命名，防止造成输出代码混乱。**
 
 > 具体请在本页查找相关内容或查阅互联网上的相关信息。
 
 ### 特殊地址 ###
 
-* /robots.txt - 由于 FarBox API 的原因，此处的 HTTP status 为 404。[#21](https://github.com/oyiadin/reos/issues/21)
 * /sitemap - 站点地图文件，需网站主自行至相关网站上报。
 * /feed - RSS（Atom）
 * /archive - 文章存档。
@@ -51,31 +38,16 @@ reos 能在新版 FarBox API 正常工作后更新 :)
 * /tags - 使用过的 tags 列表。
 * /tags/(str) - 被打上 (str) 标签的文章列表。
 * /404 - 404 页。
-* /page/(int) - 分页。
+* (*)/page/(int) - 分页。
 
 ### 特殊文件 ###
 
-* custom_js.md
 * footer.md
 * site.md
 
 ### 特殊的 Metadata ###
 
 * password
-* *status*
-* *markdown*
-
-## 为每个页面添加代码 ##
-
-可以在文件 `custom_js.md` 处添加，注意第一行要是：
-
-```text
-status:part
-```
-
-这里可以添加 `JavaScript`、`css` 等代码，它们将会在页脚出现。
-
-> 注：在该文件定义的内容不会覆盖页脚，修改页脚请参考下节。
 
 ## 自定义页脚内容 ##
 
@@ -84,21 +56,13 @@ status:part
 reos 会读取 `footer.md` 文件以修改默认页脚信息。以下文件内容即可渲染默认信息：
 
 ```text
-status:part
+status:noindex
 
 <a href="https://github.com/oyiadin/reos">Theme By Oyiadin</a> · <a href="/template">Clone template</a> · <a href="http://farbox.com">Powered By FarBox.com</a>
 ```
 
-如果想使用 Markdown 进行解析，请添加一个名为 `markdown` 的 Metadata，并将之设置为 `true`：
-
-```text
-status:part
-markdown:true
-
-> **现在支持 *Markdown* 了！**
-```
-
-在最终页面它们会变成 HTML 代码。
+> 注1：reos 同样会识别 `footer.txt`，但是 `footer.md` 将比其具有更高的优先级。
+> 注2：事实上，只要不是 `status:public` 就可以正常工作。
 
 ## 给文章添加访问密码 ##
 
@@ -108,27 +72,15 @@ markdown:true
 
 ```text
 title: 加密文章示例
-password: 密码支持中文
+status: secret
+password: your-own-password-for-this-post
 
 已被加锁的内容。
 ```
 
-> [（Issue #38）](https://github.com/oyiadin/reos/issues/38)
+> 注：由于 `status:public` 的文章可以使用 `post?action=show_raw` 这样的地址取得正文，所以此处需要显式声明一个非 `public` 的 `status` 值。
 
-> 当前有一个不足之处是：若所输入的密码长度小于 5，则会导致默认评论系统输出 *min length of comment is 5!* 的提示。
-
-## 另一种私密文章（noindex） ##
-
-如果你想要发布一篇文章，它的链接不会在任何页面出现（自己贴的不算 >_<），而可以通过一个私有链接访问，那么你可以声明该文章的 `status` 为 `noindex`：
-
-```
-title: 有个怪蜀黍来我家了
-status: noindex
-
-真的，没骗你。
-```
-
-> （该功能可以与上节的添加密码配合使用。）
+> 另外，如果只想隐藏文章链接，只要使文章的 `status` 不为 `public` 即可。如果未显式声明，FarBox 同样会视作 `public`。
 
 ## Twitter Cards ##
 
