@@ -1,5 +1,10 @@
 extends base
 
+if path1 == 'tags' and path2
+        +redirect('/tag/' + path2)
+    elif path1 == 'tag' and (not path2 or path2 == '/')
+        +redirect('/tags')
+
 block title
     if tags
         | {{ ','.join(tags) }}
