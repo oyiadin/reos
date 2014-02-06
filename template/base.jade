@@ -47,6 +47,7 @@ html
                         a(href="/template") Clone template
                         | · 
                         a(href="//farbox.com") Powered By FarBox.com
-                    else= footer.content.plain
+                    else
+                        {{ footer.content.plain }}
 
                 block footer

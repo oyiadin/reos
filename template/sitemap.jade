@@ -1,7 +1,7 @@
 doctype xml
 
 mixin get_date(post)
-    | {{ post.date.format("%Y-%m-%dT%H:%M:%S+00:00") }}
+    {{ post.date.format("%Y-%m-%dT%H:%M:%S+00:00") }}
 
 set_content_type('text/xml')
 

@@ -2,21 +2,23 @@ extends base
 
 block title
     if tags
-        +','.join(tags)
-    else "Tags Cloud"
+        | {{ ','.join(tags) }}
+    else
+        | Tags Cloud
     | · {{ site.title }}
 
 block main
     article
         if tags and posts
             h1 Tag ·
-                +', '.join(tags)
+                {{ ', '.join(tags) }}
 
             ul
                 for post in get_data(type="post", tags=tags)
                     li
                         p
-                            +post.date.format("%b %d, %Y (%a)") + " · "
+                            {{ post.date.format("%b %d, %Y (%a)") }}
+                            |  · 
                             a(href="{{ post.url }}")= post.title
 
         else
@@ -28,5 +30,6 @@ block main
                     for post in get_data(type="post", tags=tag_name)
                         li
                             p
-                                +post.date.format("%Y-%m-%d") + " · "
+                                {{ post.date.format("%Y-%m-%d") }}
+                                |  ·
                                 a(href="{{ post.url }}")= post.title

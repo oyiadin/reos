@@ -1,4 +1,4 @@
-macro comment(post)
+mixin comment(post)
     if site.configs['disqus']
         div#disqus_thread
         script(type="text/javascript").
@@ -13,7 +13,7 @@ macro comment(post)
         noscript Please enable JavaScript to view the
             a(href="http://disqus.com/?ref_noscript") comments powered by Disqus.
         a.dsq-brlink(href="http://disqus.com") comments powered by
-            span.logo-disqus Disqus
+            span.logo-disqus  Disqus
 
     elif site.configs['duoshuo']
         div.ds-thread
@@ -40,9 +40,10 @@ macro comment(post)
                                 a.n(href="{{ comment.site or '#' }}")
                                     if comment.author
                                         strong= comment.author
-                                    else anonymous
+                                    else
+                                        +anonymous
                             span.comment_date
-                                +comment.date.format("%Y-%m-%d %H:%M:%S")
+                                {{ comment.date.format("%Y-%m-%d %H:%M:%S") }}
                         div.comment_content= comment.content
 
         if comment_allowed
@@ -58,7 +59,7 @@ macro comment(post)
 
 
 
-macro render_password_block(no_form=False)
+mixin render_password_block(no_form=False)
     if no_form
         p 该文章已加密码，请进入该文章页面进行密码验证。
 

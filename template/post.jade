@@ -1,8 +1,8 @@
 extends base
-from macro import comment, render_password_block
+{% from "macro" import comment, render_password_block %}
 
 block title
-    post.title + " · " + site.title
+    {{ post.title + " · " + site.title }}
 
 block meta
     meta(name="keywords", content="{{ ','.join(post.tags[:6]) }}")
@@ -12,14 +12,17 @@ block meta
         meta(name="twitter:title", content="{{ post.title }}")
         meta(name="twitter:description", content="
             {% if not post.metadata['password'] %}
-            {{ post.content.limit(200) }}
+            {{ post.content[0:202] }}
             {% else %}访问该文章需要密码验证。{% endif %}")
+        //- Twitter Cards 对内容的限制是 200 字
+        //- 取 202 只是为了让 Twiiter 自己处理内容溢出的效果。
 
         if site.configs['twitter']
             meta(name="twitter:creator", content="{{ site.configs['twitter'] }}")
 
-        if post.cover
-            meta(name="twitter:image:src", content="{{ post.cover }}")
+        //
+            if post.cover
+                meta(name="twitter:image:src", content="{{ post.cover }}")
 
     style.
         input[type=submit] {
