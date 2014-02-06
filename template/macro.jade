@@ -53,8 +53,8 @@ mixin comment(post)
                 if error
                     p.g.comment_error= error
                     input.comment_new_input(type="text", name="author", value="Name")
-                    input.comment_new_input(type="text", name="author", value="Email")
-                    input.comment_new_input(type="text", name="author", value="Site")
+                    input.comment_new_input(type="text", name="email", value="Email")
+                    input.comment_new_input(type="text", name="site", value="Site")
                     input.comment_new_send(type="submit", value="OK")
 
 
