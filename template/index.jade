@@ -2,7 +2,7 @@
 {% from "macro" import render_password_block %}
 
 block main
-    for post in posts
+    for post in get_data(type='post', status='public')
         article
             h1
                 a(href="{{ post.url }}#postTitle")= post.title

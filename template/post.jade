@@ -13,8 +13,12 @@ block meta
         meta(name="twitter:title", content="{{ post.title }}")
         meta(name="twitter:description", content="
             {% if not post.metadata['password'] %}
-            {{ post.content[0:202] }}
-            {% else %}访问该文章需要密码验证。{% endif %}")
+            {{ ( post.content[:] | replace('\n', '') )[0:202] }}
+            {% else %}访问该文章需要密码验证。
+            {% endif %}")
+        //- post.content[:] 这个比较无奈（也因为我的需求比较奇葩……）
+        //- 因为此处的换行会被 Twitter Cards 过滤，所以最后字数其实是不准的。
+
         //- Twitter Cards 对内容的限制是 200 字
         //- 取 202 只是为了让 Twiiter 自己处理内容溢出的效果。
 
