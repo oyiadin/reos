@@ -50,12 +50,14 @@ mixin comment(post)
             //- 表单的 POST 应该发到文章本页。
             form.comment_new(method="post", action="#comments")
                 textarea(name="content", rows="10")= comment_content
+
                 if error
                     p.g.comment_error= error
-                    input.comment_new_input(type="text", name="author", value="Name")
-                    input.comment_new_input(type="text", name="email", value="Email")
-                    input.comment_new_input(type="text", name="site", value="Site")
-                    input.comment_new_send(type="submit", value="OK")
+
+                input.comment_new_input(type="text", name="author", value="Name")
+                input.comment_new_input(type="text", name="email", value="Email")
+                input.comment_new_input(type="text", name="site", value="Site")
+                input.comment_new_send(type="submit", value="OK")
 
 
 
