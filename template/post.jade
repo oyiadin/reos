@@ -5,7 +5,8 @@ block title
     {{ post.title + " · " + site.title }}
 
 block meta
-    meta(name="keywords", content="{{ ','.join(post.tags[:6]) }}")
+    if post.tags
+        meta(name="keywords", content="{{ ','.join(post.tags[:6]) }}")
 
     if site.configs['enable_twitter_cards'] == True
         meta(name="twitter:card", content="summary")
