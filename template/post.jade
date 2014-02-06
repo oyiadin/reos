@@ -55,8 +55,7 @@ block main
                 else
                     if request.form['password']|string
                         p 密码错误，请重试。
-
-                +render_password_block()
+                    +render_password_block()
 
         div.eof.g.s(title="End Of File")
             | · EOF ·
