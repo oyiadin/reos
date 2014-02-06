@@ -41,7 +41,7 @@ mixin comment(post)
                                     if comment.author
                                         strong= comment.author
                                     else
-                                        +anonymous
+                                        | anonymous
                             span.comment_date
                                 {{ comment.date.format("%Y-%m-%d %H:%M:%S") }}
                         div.comment_content= comment.content
