@@ -1,9 +1,9 @@
 mixin comment(post)
-    if site.configs['disqus']
+    if site.configs.disqus
         div#disqus_thread
         script(type="text/javascript").
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = '{{ site.configs["disqus"] }}';
+            var disqus_shortname = '{{ site.configs.disqus }}';
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function() {
                 var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -15,10 +15,10 @@ mixin comment(post)
         a.dsq-brlink(href="http://disqus.com") comments powered by
             span.logo-disqus  Disqus
 
-    elif site.configs['duoshuo']
+    elif site.configs.duoshuo
         div.ds-thread
         script(type="text/javascript").
-            var duoshuoQuery = {short_name:"{{ site.configs['duoshuo'] }}"};
+            var duoshuoQuery = {short_name:"{{ site.configs.duoshuo }}"};
             (function() {
                 var ds = document.createElement('script');
                 ds.type = 'text/javascript';ds.async = true;

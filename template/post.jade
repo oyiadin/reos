@@ -8,11 +8,11 @@ block meta
     if post.tags
         meta(name="keywords", content="{{ ','.join(post.tags[:6]) }}")
 
-    if site.configs['enable_twitter_cards'] == True
+    if site.configs.enable_twitter_cards == True
         meta(name="twitter:card", content="summary")
         meta(name="twitter:title", content="{{ post.title }}")
         meta(name="twitter:description", content="
-            {% if not post.metadata['password'] %}
+            {% if not post.metadata.password %}
             {{ ( post.content[:] | replace('\n', '') )[0:202] }}
             {% else %}访问该文章需要密码验证。
             {% endif %}")
@@ -22,8 +22,8 @@ block meta
         //- Twitter Cards 对内容的限制是 200 字
         //- 取 202 只是为了让 Twiiter 自己处理内容溢出的效果。
 
-        if site.configs['twitter']
-            meta(name="twitter:creator", content="{{ site.configs['twitter'] }}")
+        if site.configs.twitter
+            meta(name="twitter:creator", content="{{ site.configs.twitter }}")
 
         //
             if post.cover
@@ -49,15 +49,15 @@ block main
                 |  views
 
         div#postContent
-            if not post.metadata['password']
+            if not post.metadata.password
                 post.content
 
             else
-                if request.form['password']|string == post.metadata['password']|string
+                if request.form.password|string == post.metadata.password|string
                     post.content
 
                 else
-                    if request.form['password']|string
+                    if request.form.password|string
                         p 密码错误，请重试。
                     +render_password_block()
 

@@ -15,11 +15,11 @@ block main
                 span.views
                     post.visits
                     |  views
-                if site.configs['disqus']
+                if site.configs.disqus
                     | · 
                     a.n.g(href="{{ post.url }}#disqus_thread")= "Comments"
 
-            if not post.metadata['password']
+            if not post.metadata.password
                 div= post.content.limit(100)
             else
                 +render_password_block(no_form=True)
@@ -27,9 +27,9 @@ block main
             hr
 
 block footer
-    if site.configs['disqus']
+    if site.configs.disqus
         script(type="text/javascript").
-            var disqus_shortname = '{{ site.configs['disqus'] }}';
+            var disqus_shortname = '{{ site.configs.disqus }}';
             (function() {
                 var s = document.createElement('script');
                 s.async = true;

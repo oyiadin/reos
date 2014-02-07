@@ -7,17 +7,17 @@ html
                 site.title
 
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        meta(name="author", content="{{ site.configs['author'] or site.title }}")
+        meta(name="author", content="{{ site.configs.author or site.title }}")
 
         load("/t/main.scss /t/base.scss /t/pygments_style.scss")
 
         block meta
         //- 一个空 block
 
-        if site.configs['google_site_verification']
-            meta(name="google-site-verification", content="{{ site.configs['google_site_verification'] }}")
-        if site.configs['baidu_site_verification']
-            meta(name="baidu-site-verification", content="{{ site.configs['baidu_site_verification'] }}")
+        if site.configs.google_site_verification
+            meta(name="google-site-verification", content="{{ site.configs.google_site_verification }}")
+        if site.configs.baidu_site_verification
+            meta(name="baidu-site-verification", content="{{ site.configs.baidu_site_verification }}")
 
     body
         section#main

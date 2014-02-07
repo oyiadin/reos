@@ -21,12 +21,12 @@ feed(xmlns="http://www.w3.org/2005/Atom")
 			id= post.url_path
 			author
 				name
-					if site.configs['author']
-						{{ site.configs['author'] }}
+					if site.configs.author
+						{{ site.configs.author }}
 					else
 						site.title
 			summary(type="html")
-				if not post.metadata['password']
+				if not post.metadata.password
 					{{ post.content | escape }}
 				else
 					+render_password_block(no_form=True)
