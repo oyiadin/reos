@@ -1,42 +1,24 @@
 ﻿extends base
-{% from "macro" import render_password_block %}
 
-block main
-    for post in get_data(type='post', status='public')
+block title
+    | 主页
+
+block content
+    for post in get_data(type='post', status=['public', 'sercet'])
         article
-            h1
-                a(href="{{ post.url }}#postTitle")= post.title
+            header
+                h2
+                    a(href="{{ post.url }}")
+                        if not post.metadata.password
+                            post.title
+                        else
+                            | 密码保护：{{ post.title }}
 
-            p.info= post.date.format("%b %d, %Y (%a)") + " · "
-                span.tags
-                    for tag in post.tags
-                        a.n.g(href="/tags/{{ tag }}")= tag
-                        | ·
-                span.views
-                    post.visits
-                    |  views
-                if site.configs.disqus
-                    | · 
-                    a.n.g(href="{{ post.url }}#disqus_thread")= "Comments"
+                p#date= post.date.format("%b %d, %Y")
 
             if not post.metadata.password
-                div= post.content.limit(100)
+                div= post.content.limit(120)
             else
-                +render_password_block(no_form=True)
+                include include/password_form
 
-            hr
-
-block footer
-    if site.configs.disqus
-        script(type="text/javascript").
-            var disqus_shortname = '{{ site.configs.disqus }}';
-            (function() {
-                var s = document.createElement('script');
-                s.async = true;
-                s.type = 'text/javascript';
-                s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-                (
-                    document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]
-                ).appendChild(s);
-            }());
-        //- Disqus 显示文章评论数。
+        hr

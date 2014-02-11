@@ -4,7 +4,7 @@ html
     head
         title
             block title
-                site.title
+            | · {{ site.title }}
 
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(name="author", content="{{ site.configs.author or site.title }}")
@@ -20,37 +20,37 @@ html
             meta(name="baidu-site-verification", content="{{ site.configs.baidu_site_verification }}")
 
     body
-        section#main
-            section#header
-                h1#title
-                    a.n(href="//{{ site.domain }}")= site.title
-                if site.raw_content
-                    p#description= site.raw_content
+        div#main-container
+            header#site-header
+                block title_in_body
+                    h1
+                        a(href="/")= site.title
+                if site.content
+                    p= site.content
 
-            section#content
-                block main
+            block content
 
-                block paginator
-                    if paginator.has_pre or paginator.has_next
-                        div#paginator
-                            if paginator.has_previous
-                                a.paginator.paginatorPrev.n(href="{{ paginator.previous_page_url }}", title="Previous", rel="prev")= "&lt;&lt;--"
-                            if paginator.has_next
-                                a.paginator.paginatorNext.n(href="{{ paginator.next_page_url }}", title="Next", rel="next")= "--&gt;&gt;"
-
-            section#footer
-                div.center
-                    footer = get_doc('footer.md') or get_doc('footer.txt')
-                    if not footer
-                        a(href="https://github.com/oyiadin/reos") Theme By Oyiadin
+            footer#site-footer
+                footer = get_doc('footer.md') or get_doc('footer.txt')
+                if not footer
+                    p.auto_hide
+                        a(href="https://github.com/oyiadin/reos") 模板源码
                         | · 
-                        a(href="/template") Clone template
+                        a(href="/template") 克隆主题
                         | · 
-                        a(href="//farbox.com") Powered By FarBox.com
-                    else
-                        {{ footer.content.plain }}
+                        a(href="/admin") 网站管理
+                        | · 
+                        a(href="/service/status") 网站状态
+                        | · 
+                        a(href="/admin/editor") 写文章
+                    p
+                        | 本站点由
+                        a(href="http://farbox.com") FarBox
+                        | 强力驱动
+                        if site.config.author
+                            | ；由 {{ author }} 倾情撰写
+                        | 。
+                else
+                    {{ footer.content }}
 
-                <!--scripts_for_doc-->
                 <!--scripts_per_page-->
-
-                block footer

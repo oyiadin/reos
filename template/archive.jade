@@ -1,14 +1,14 @@
 extends base
 
 block title
-	| Archive · {{ site.title }}
+	| 归档
 
-block main
-	article
-	    h1 Archive · {{ site.title }}
+block content
+	div
+	    h1 归档 · {{ site.title }}
 
 	    ul
-		    for post in get_data(type='post')
+		    for post in get_data(type='post', status=['public', 'sercet'])
 		       	li
-		            p= post.date.format("%Y-%m-%d") + " · "
-		            	a(href="{{ post.url }}")= post.title
+		            post.date.format("%Y-%m-%d")
+		            a(href="{{ post.url }}")= post.title
