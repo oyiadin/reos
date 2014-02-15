@@ -25,10 +25,7 @@ block meta
             if post.cover
                 meta(name="twitter:image:src", content="{{ post.cover }}")
 
-block title_in_body
-    p#site-title
-        a(href="/")= site.title
-    //- 在文章页内，h1 应使用到文章标题。
+block title_h1
 
 block content
     article

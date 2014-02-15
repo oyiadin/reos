@@ -3,18 +3,24 @@ extends base
 block title
     | 404
 
+block title_p
+
 block content
-    p 啊噢，你到达了一个未知区域。
+    article
+        header
+            h1 玩脱啦~~~
 
-    hr
+            p.info ['4', '0'][4]
 
-    p 不过你可以选择：
+        p 啊噢，你到达了一个未知区域。;-(
 
-    ul
-        li
-            a(href="/") 返回地球
-        li
-            a(href="/archive") 查看所有已知区域
-        //-
+        p 不过你可以选择：
+
+        ul
             li
-                a(href="/search") 搜索附近星球
+                a(href="/") 返回地球
+            li
+                a(href="/archive") 查看所有已知区域
+            //-
+                li
+                    a(href="/search") 搜索附近星球

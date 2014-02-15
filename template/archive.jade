@@ -3,12 +3,22 @@ extends base
 block title
 	| 归档
 
+block title_h1
+
 block content
-	div
-	    h1 归档 · {{ site.title }}
+	article
+	    posts = get_data(type='post', status=['public', 'sercet'], limit=100)
+
+	    header
+    	    h1 归档
+
+    	    p.info
+    	        from = posts[-1].date.format("%b %d %Y")
+    	        to = posts[0].date.format("%b %d %Y")
+    	        | /* from {{ from }} to {{ to }} */
 
 	    ul
-		    for post in get_data(type='post', status=['public', 'sercet'])
+		    for post in posts
 		       	li
 		            post.date.format("%Y-%m-%d")
 		            a(href="{{ post.url }}")= post.title

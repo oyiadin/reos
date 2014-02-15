@@ -22,11 +22,18 @@ html
     body
         div#main-container
             header#site-header
-                block title_in_body
+                block title_h1
                     h1#site-title
                         a(href="/")= site.title
+                block title_p
+                    p#site-title
+                        a(href="/")= site.title
+                //- h1 应使用到单页中最需要突出的地方
+                //- 比如在文章页就应该使用到文章标题
+
                 if site.content
                     site.content
+
                 nav
                     | { 
                     if has('posts')
