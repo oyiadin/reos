@@ -1,24 +1,26 @@
 extends base
 
 block title
-	| 归档
+    | 归档
 
 block title_h1
 
 block content
-	article
-	    posts = get_data(type='post', status=['public', 'sercet'], limit=100)
+    article
+        posts = get_data(type='post', status=['public', 'sercet'], limit=100)
 
-	    header
-    	    h1 归档
+        header
+            h1 归档
 
-    	    p.info
-    	        from = posts[-1].date.format("%b %d %Y")
-    	        to = posts[0].date.format("%b %d %Y")
-    	        | /* from {{ from }} to {{ to }} */
+            p.info
+                from = posts[-1].date.format("%b %d %Y")
+                to = posts[0].date.format("%b %d %Y")
+                | /* from {{ from }} to {{ to }} */
 
-	    ul
-		    for post in posts
-		       	li
-		            post.date.format("%Y-%m-%d")
-		            a(href="{{ post.url }}")= post.title
+        ul
+            for post in posts
+                li
+                    {{ post.date.format("%Y-%m-%d") }}
+                    a(href="{{ post.url }}")= post.title
+
+    include include/pager

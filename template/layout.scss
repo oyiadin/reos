@@ -4,8 +4,11 @@
     margin: 0 auto;
     padding: 0 5%;
 }
-header, #site-footer {
+header, #paginator, #site-footer {
     text-align: center;
+}
+#paginator {
+	padding-botoom: 0.2em;
 }
 #site-title {
 	margin: 1.2em 0;
