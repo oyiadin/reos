@@ -1,4 +1,4 @@
-﻿doctype html
+doctype html
 
 html
     head
@@ -9,7 +9,7 @@ html
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(name="author", content="{{ site.configs.author or site.title }}")
 
-        load("/t/elements.scss /t/layout.scss /t/pygments_style.scss")
+        load("/t/global.scss /t/layout.scss /t/pygments_style.scss")
 
         block meta
         //- 一个空 block
@@ -23,34 +23,47 @@ html
         div#main-container
             header#site-header
                 block title_in_body
-                    h1
+                    h1#site-title
                         a(href="/")= site.title
                 if site.content
-                    p= site.content
+                    site.content
+                nav
+                    | { 
+                    if has('posts')
+                        a(href="/archive") 归档
+                        |  /
+                    if site.tags
+                        a(href="/tags") 标签云
+                        |  /
+                    if has('images')
+                        a(href="/album") 相册
+                        |  /
+                    a(href="/feed") 订阅
+                    |  }
 
             block content
 
             footer#site-footer
                 footer = get_doc('footer.md') or get_doc('footer.txt')
                 if not footer
-                    p.auto_hide
-                        a(href="https://github.com/oyiadin/reos") 模板源码
-                        | · 
-                        a(href="/template") 克隆主题
-                        | · 
-                        a(href="/admin") 网站管理
-                        | · 
-                        a(href="/service/status") 网站状态
-                        | · 
-                        a(href="/admin/editor") 写文章
                     p
-                        | 本站点由
+                        | { 
+                        a(href="https://github.com/oyiadin/reos") 模板源码
+                        |  /
+                        a(href="/template", rel="nofollow") 克隆主题
+                        |  / 
+                        a(href="/admin", rel="nofollow") 网站管理
+                        |  /
+                        a(href="/service/status", rel="nofollow") 网站状态
+                        |  /
+                        a(href="/admin/editor", rel="nofollow") 写文章
+                        |  }
+                    p
+                        | 本站点由 
                         a(href="http://farbox.com") FarBox
-                        | 强力驱动
-                        if site.config.author
-                            | ；由 {{ author }} 倾情撰写
+                        |  强力驱动
+                        if site.configs.author
+                            | ；由 {{ site.configs.author }} 倾情撰写
                         | 。
                 else
-                    {{ footer.content }}
-
-                <!--scripts_per_page-->
+                    {{ footer.raw_content }}

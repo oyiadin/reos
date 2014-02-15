@@ -5,19 +5,16 @@ block title
 
 block meta
     if post.tags
-        meta(name="keywords", content="{{ ','.join(post.tags[:6]) }}")
+        meta(name="keywords", content="{{ ','.join(post.tags) }}")
 
     if site.configs.enable_twitter_cards
         meta(name="twitter:card", content="summary")
         meta(name="twitter:title", content="{{ post.title }}")
         meta(name="twitter:description", content="
             {% if not post.metadata.password %}
-            {{ ( post.content[:] | replace('\n', '') )[0:202] }}
+            {{ post.content[0:202] }}
             {% else %}访问该文章需要密码验证。
             {% endif %}")
-        //- post.content[:] 这个比较无奈（也因为我的需求比较奇葩……）
-        //- 因为此处的换行会被 Twitter Cards 过滤，所以最后字数其实是不准的。
-
         //- Twitter Cards 对内容的限制是 200 字
         //- 取 202 只是为了让 Twiiter 自己处理内容溢出的效果。
 
@@ -29,7 +26,7 @@ block meta
                 meta(name="twitter:image:src", content="{{ post.cover }}")
 
 block title_in_body
-    p
+    p#site-title
         a(href="/")= site.title
     //- 在文章页内，h1 应使用到文章标题。
 
@@ -44,7 +41,7 @@ block content
                         | 密码保护：{{ post.title }}
                     
 
-            p#date= post.date.format("%b %d, %Y %H:%M (%a)")
+            p#date.info= post.date.format("/* %b %d, %Y(%a) %H:%M */")
 
         div#content
             if not post.metadata.password or request.form.password|string == post.metadata.password|string
@@ -58,20 +55,20 @@ block content
                         strong 输入错误，请重试。
 
         footer#footer
-            p#eof(title="End Of File") · EOF ·
-
-            p
+            p.info
                 | 该文发表于 {{ post.date }}
 
                 if post.tags
                     | ，被贴了
-                    for tag in post.tags
-                        a(href="/tag/{{ tag }}")= tag
-                        | 、
-                    | 标签
+                    a(href="/tag/{{ post.tags[0] }}")= post.tags[0]
+                    if post.tags|length > 1
+                        for tag in post.tags[1:]
+                            | 、
+                            a(href="/tag/{{ tag }}")= tag
+                    | 等标签
 
                 | ，被阅读了约 {{ post.visits }} 次。
 
-        include include/comments
+            div#eof(title="End Of File") /* EOF */
 
-        // scripts_for_doc
+        include include/comments

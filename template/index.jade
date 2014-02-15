@@ -4,7 +4,7 @@ block title
     | 主页
 
 block content
-    for post in get_data(type='post', status=['public', 'sercet'])
+    for post in get_data(type='post', status=['public', 'secret'])
         article
             header
                 h2
@@ -14,7 +14,7 @@ block content
                         else
                             | 密码保护：{{ post.title }}
 
-                p#date= post.date.format("%b %d, %Y")
+                p#date.info= post.date.format("/* %b %d, %Y */")
 
             if not post.metadata.password
                 div= post.content.limit(120)
