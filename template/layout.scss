@@ -46,3 +46,29 @@ header, #paginator, #site-footer {
 .comment_date {
     color: gray;
 }
+
+form {
+    overflow: hidden;
+
+    input[name=email], input[name=author], input[name=site] {
+        width: 29%;
+        margin-right: 1%;
+        display: inline-block;
+        float: left;
+    }
+    input[type=submit] {
+        width: 10%;
+        display: inline-block;
+        float: left;
+    }
+    @media screen and (max-width: 620px) {
+        input[name=email],
+        input[name=author],
+        input[name=site],
+        input[type=submit] {
+            width: 100%;
+            margin-right: 0;
+            display: block;
+        }
+    }
+}

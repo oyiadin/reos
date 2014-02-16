@@ -43,12 +43,13 @@ else
    if comment_allowed
        //- 表单的 POST 应该发到文章本页。
        form(method="post", action="#comments")
-           textarea(name="content", rows="10")= comment_content
+           textarea(name="content", rows="10", placeholder="评论内容 (必须在 5 字以上)")= comment_content
 
            if error
-               p= error
+                p
+                    strong= error
 
-           input(type="text", name="author", value="称呼")
-           input(type="text", name="email", value="邮箱")
-           input(type="text", name="site", value="网站")
+           input(type="text", name="email", placeholder="邮箱(必需)")
+           input(type="text", name="author", placeholder="称呼(可选)")
+           input(type="text", name="site", placeholder="网站(可选)")
            input(type="submit", value="提交")
