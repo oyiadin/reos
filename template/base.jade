@@ -1,18 +1,21 @@
-﻿doctype html
+doctype html
 
 html
     head
         title
             block title
-                site.title
+            | · {{ site.title }}
 
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(name="author", content="{{ site.configs.author or site.title }}")
 
-        load("/t/main.scss /t/base.scss /t/pygments_style.scss")
+        load("/t/global.scss /t/layout.scss /t/pygments_style.scss")
 
         block meta
         //- 一个空 block
+
+        if site.configs.black_mode
+            load('/t/black.scss')
 
         if site.configs.google_site_verification
             meta(name="google-site-verification", content="{{ site.configs.google_site_verification }}")
@@ -20,37 +23,57 @@ html
             meta(name="baidu-site-verification", content="{{ site.configs.baidu_site_verification }}")
 
     body
-        section#main
-            section#header
-                h1#title
-                    a.n(href="//{{ site.domain }}")= site.title
-                if site.raw_content
-                    p#description= site.raw_content
+        div#main-container
+            header#site-header
+                block title_h1
+                    h1#site-title
+                        a(href="/")= site.title
+                block title_p
+                    p#site-title
+                        a(href="/")= site.title
+                //- h1 应使用到单页中最需要突出的地方
+                //- 比如在文章页就应该使用到文章标题
 
-            section#content
-                block main
+                if site.content
+                    site.content
 
-                block paginator
-                    if paginator.has_pre or paginator.has_next
-                        div#paginator
-                            if paginator.has_previous
-                                a.paginator.paginatorPrev.n(href="{{ paginator.previous_page_url }}", title="Previous", rel="prev")= "&lt;&lt;--"
-                            if paginator.has_next
-                                a.paginator.paginatorNext.n(href="{{ paginator.next_page_url }}", title="Next", rel="next")= "--&gt;&gt;"
+                nav
+                    | { 
+                    if has('posts')
+                        a(href="/archive") 归档
+                        |  /
+                    if site.tags
+                        a(href="/tags") 标签云
+                        |  /
+                    if has('images')
+                        a(href="/album") 相册
+                        |  /
+                    a(href="/feed") 订阅
+                    |  }
 
-            section#footer
-                div.center
-                    footer = get_doc('footer.md') or get_doc('footer.txt')
-                    if not footer
-                        a(href="https://github.com/oyiadin/reos") Theme By Oyiadin
-                        | · 
-                        a(href="/template") Clone template
-                        | · 
-                        a(href="//farbox.com") Powered By FarBox.com
-                    else
-                        {{ footer.content.plain }}
+            block content
 
-                <!--scripts_for_doc-->
-                <!--scripts_per_page-->
-
-                block footer
+            footer#site-footer
+                footer = get_doc('footer.md') or get_doc('footer.txt')
+                if not footer
+                    p
+                        | { 
+                        a(href="https://github.com/oyiadin/reos/tree/develop", target="_blank") 模板源码
+                        |  /
+                        a(href="/template", rel="nofollow", target="_blank") 克隆主题
+                        |  / 
+                        a(href="/admin", rel="nofollow", target="_blank") 网站管理
+                        |  /
+                        a(href="/service/status", rel="nofollow", target="_blank") 网站状态
+                        |  /
+                        a(href="/admin/editor", rel="nofollow", target="_blank") 写文章
+                        |  }
+                    p
+                        | 本站点由 
+                        a(href="http://farbox.com", target="_blank") FarBox
+                        |  强力驱动
+                        if site.configs.author
+                            | ；由 {{ site.configs.author }} 倾情撰写
+                        | 。
+                else
+                    {{ footer.raw_content }}

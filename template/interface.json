@@ -188,6 +188,32 @@
                 "title_zh_cn":"评论系统",
                 "cells":[
                     {
+                        "parts_per_line": 1,
+                        "parts": [
+                            {
+                                "key": "comment_system",
+                                "title": "Choose a comment system",
+                                "title_zh_cn": "选择一个评论系统",
+                                "default_value": "farbox original",
+                                "model": "select",
+                                "options": [
+                                    {
+                                        "value": "farbox original",
+                                        "title": "FarBox original"
+                                    },
+                                    {
+                                        "value": "disqus",
+                                        "title": "Disqus"
+                                    },
+                                    {
+                                        "value": "duoshuo",
+                                        "title": "Duoshuo"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "parts_per_line": 2,
                         "parts":[
                             {
@@ -406,6 +432,13 @@
                                 "title": "Disable the Editor which one make you write directly on the Web Page",
                                 "title_zh_cn": "禁用`可直接在页面中书写的编辑器`",
                                 "model":"check",
+                                "default_value": "no"
+                            },
+                            {
+                                "key": "black_mode",
+                                "title": "Switch to black style.",
+                                "title_zh_cn": "切换到黑色调页面",
+                                "model": "check",
                                 "default_value": "no"
                             },
                             {

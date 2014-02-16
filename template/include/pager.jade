@@ -1,0 +1,9 @@
+if pager.has_next or pager.has_pre
+	div#paginator
+		if pager.has_pre
+			span
+				a(href="{{ pager.pre_page_url }}")= "&lt; 上一页 "
+		span 共 {{ pager.total_pages }} 页
+		if pager.has_next
+			span
+				a(href="{{ pager.next_page_url }}")= " 下一页 &gt;"

@@ -1,14 +1,26 @@
 extends base
 
 block title
-	| Archive · {{ site.title }}
+    | 归档
 
-block main
-	article
-	    h1 Archive · {{ site.title }}
+block title_h1
 
-	    ul
-		    for post in get_data(type='post')
-		       	li
-		            p= post.date.format("%Y-%m-%d") + " · "
-		            	a(href="{{ post.url }}")= post.title
+block content
+    article
+        posts = get_data(type='post', status=['public', 'sercet'], limit=100)
+
+        header
+            h1 归档
+
+            p.info
+                from = posts[-1].date.format("%b %d %Y")
+                to = posts[0].date.format("%b %d %Y")
+                | /* from {{ from }} to {{ to }} */
+
+        ul
+            for post in posts
+                li
+                    {{ post.date.format("%Y-%m-%d") }}
+                    a(href="{{ post.url }}")= post.title
+
+    include include/pager

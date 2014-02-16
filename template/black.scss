@@ -1,0 +1,25 @@
+/* 该文件应该在 global.scss 的后面被引用 */
+body {
+    color: white;
+    background-color: black;
+}
+h1, h2, h3, h4, h5, h6, #site-title {
+    color: white;
+}
+blockquote, div.codehilite, .toc {
+    background-color: #333;
+    color: white;
+}
+button:hover, input[type=submit]:hover {
+    color: black;
+    background-color: white;
+}
+
+::selection {
+    color: green;
+}
+
+#eof:hover {
+    background-color: white;
+    color: black;
+}

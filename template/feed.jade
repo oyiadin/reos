@@ -1,7 +1,7 @@
 doctype xml
 
 set_content_type('application/xml')
-{% from "macro" import render_password_block %}
+posts = get_data(type='post', status=['public', 'secret'], limit=10)
 
 feed(xmlns="http://www.w3.org/2005/Atom")
 	title= site.title
@@ -15,18 +15,21 @@ feed(xmlns="http://www.w3.org/2005/Atom")
 
 	for post in posts
 		entry
-			title= post.title
+			if not post.metadata.password
+				title= post.title
+			else
+				title= "密码保护：" + post.title
 			link(href="http://{{ site.domain }}{{ post.url }}", rel="alternate")
 			updated= post.date.format("%Y-%m-%dT%H:%M:%SZ")
 			id= post.url_path
 			author
 				name
 					if site.configs.author
-						{{ site.configs.author }}
+						site.configs.author
 					else
 						site.title
 			summary(type="html")
 				if not post.metadata.password
-					{{ post.content | escape }}
+					{{ post.content.limit(500) | escape }}
 				else
-					+render_password_block(no_form=True)
+					| 这是一篇受密码保护的文章，请进入文章页以验证密码继续查看。

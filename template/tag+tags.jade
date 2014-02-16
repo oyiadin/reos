@@ -5,18 +5,24 @@ if path1 == 'tags' and path2
 elif path1 == 'tag' and (not path2 or path2 == '/')
     +redirect('/tags')
 
+block title_h1
+
 block title
     if tags
         | {{ ','.join(tags) }}
     else
-        | Tags Cloud
-    | · {{ site.title }}
+        | 标签云
 
-block main
+block content
     article
-        if tags and posts
-            h1 Tag ·
-                {{ ', '.join(tags) }}
+        tags_count = site.tags|length
+
+        if tags_count == 0
+            p.info 本站点的文章没有被打过标签哦~
+
+        elif tags and posts
+            header
+                h1 标签 · {{ ', '.join(tags) }}
 
             ul
                 for post in get_data(type="post", tags=tags)
@@ -27,14 +33,17 @@ block main
                             a(href="{{ post.url }}")= post.title
 
         else
-            h1 Tags Cloud.
-            for tag_name, tag_count in site.tags
-                h2= tag_name + "(" + tag_count + ")"
+            header
+                h1 标签云
 
-                ul
-                    for post in get_data(type="post", tags=tag_name)
-                        li
-                            p
-                                {{ post.date.format("%Y-%m-%d") }}
-                                |  ·
-                                a(href="{{ post.url }}")= post.title
+                p.info
+                    if tags_count > 1
+                        | /* {{ tags_count }} tags */
+                    else
+                        | /* just one tag ;-) */
+
+            ul
+                for tag_name, tag_count in site.tags
+                    li
+                        | ({{ tag_count }} 篇文章)
+                        a(href="/tag/{{ tag_name }}")= tag_name
