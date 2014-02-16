@@ -36,11 +36,8 @@ else
                div.comment_info
                    span.comment_author
                        a(href="{{ comment.site or '#' }}")
-                           if comment.author
-                               strong= comment.author
-                           else
-                               | 匿名网友
-                   span.comment_date= comment.date.format("%Y-%m-%d %H:%M:%S")
+                           strong= comment.author
+                   span.comment_date= comment.date.format(" %Y-%m-%d %H:%M:%S")
                div.comment_content= comment.content
 
    if comment_allowed
