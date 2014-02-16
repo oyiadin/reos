@@ -38,18 +38,35 @@ html
                     site.content
 
                 nav
-                    | { 
-                    if has('posts')
-                        a(href="/archive") 归档
-                        |  /
-                    if site.tags
-                        a(href="/tags") 标签云
-                        |  /
-                    if has('images')
-                        a(href="/album") 相册
-                        |  /
-                    a(href="/feed") 订阅
-                    |  }
+                    div
+                        | { 
+                        if has('posts')
+                            a(href="/archive") 归档
+                            |  /
+                        if site.tags
+                            a(href="/tags") 标签云
+                            |  /
+                        if has('images')
+                            a(href="/album") 相册
+                            |  /
+                        if has('about.md') or has('about.txt')
+                            a(href="/post/about") 关于
+                            |  /
+                        if has('links.md') or has('links.txt')
+                            a(href="/links") 友链
+                            |  /
+                        a(href="/feed") 订阅
+                        |  }
+                    div
+                        | { 
+                        keys = ['github', 'twitter', 'weibo']
+                        for one_key in keys
+                            if site.configs[one_key]
+                                a(target="_blank", href="http://{{ one_key }}.com/{{ site.configs[one_key] }}")= one_key|capitalize
+                                //- 暂时找不到更优雅的写法
+                                if not one_key == keys[-1]
+                                    |  /
+                        |  }
 
             block content
 

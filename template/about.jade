@@ -1,0 +1,4 @@
+if not (has('about.md') or has('about.txt'))
+    raise_404()
+else
+    redirect('/post/about')

@@ -1,0 +1,23 @@
+if not (has('links.md') or has('links.txt'))
+    raise_404()
+else
+    post = get_doc('links.md') or get_doc('links.txt')
+
+extends base
+
+block title
+    | 友情链接
+
+block title_h1
+
+block content
+    article
+        header#header
+            h1= post.title or site.title + "的友情链接"
+
+            p.info /* last updated: {{ post.date.format("%b %d, %Y") }} */
+
+        div#content
+            include include/show_content
+            //- 本来想在 links.md 里不管加密的=。=
+            //- 最后想，算了，加就加~

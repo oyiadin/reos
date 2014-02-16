@@ -41,15 +41,7 @@ block content
             p#date.info= post.date.format("/* %b %d, %Y(%a) %H:%M */")
 
         div#content
-            if not post.metadata.password or request.form.password|string == post.metadata.password|string
-                post.content
-
-            else
-                include include/password_form
-
-                if request.form.password|string
-                    p
-                        strong 输入错误，请重试。
+            include include/show_content
 
         footer#footer
             p.info
