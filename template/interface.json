@@ -436,7 +436,7 @@
                             },
                             {
                                 "key": "black_mode",
-                                "title": "Switch to black style.", // 我的英语实在很渣
+                                "title": "Switch to black style.",
                                 "title_zh_cn": "切换到黑色调页面",
                                 "model": "check",
                                 "default_value": "no"
