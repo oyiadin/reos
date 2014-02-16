@@ -16,7 +16,7 @@ block content
                         else
                             | 密码保护：{{ post.title }}
 
-                p#date.info= post.date.format("/* %b %d, %Y */")
+                p.info= post.date.format("/* %b %d, %Y */")
 
             if not post.metadata.password
                 div= post.content.limit(120)
