@@ -106,7 +106,7 @@ table {
 ul {
     list-style-type: square;
 }
-textarea, input[type=text], input[type=password], input[type=submit], button {
+textarea, input, button {
     box-sizing: border-box;
     border: 1px solid gray;
     margin: 0.3em 0;

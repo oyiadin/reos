@@ -47,7 +47,8 @@ header, #paginator, #site-footer {
     color: gray;
 }
 
-form {
+#comments + form {
+    /* 只匹配评论框那个表单 */
     overflow: hidden;
 
     input[name=email], input[name=author], input[name=site] {
