@@ -8,8 +8,37 @@ header, #paginator, #site-footer {
     text-align: center;
 }
 #paginator {
-	padding-botoom: 0.2em;
+    padding-botoom: 0.2em;
 }
 #site-title {
-	margin: 1.2em 0;
+    margin: 1.2em 0;
+}
+
+#comments, .comment {
+    overflow: hidden;
+}
+.comment {
+    min-height: 6.5em;
+}
+.comment_avatar {
+    width: 6em;
+    height: 6em;
+    float: left;
+
+    img {
+        line-height: 5em;
+        max-height: 5em;
+        max-width: 5em;
+        margin: 0.5em auto 1em;
+        border-radius: 100%;
+        box-shadow: 0 0 8px gray;
+    }
+}
+.comment_info, .comment_content {
+    margin-left: 6.3em;
+}
+.comment_info {
+    line-height: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
