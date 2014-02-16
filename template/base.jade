@@ -14,6 +14,9 @@ html
         block meta
         //- 一个空 block
 
+        if site.configs.black_mode
+            load('/t/black.scss')
+
         if site.configs.google_site_verification
             meta(name="google-site-verification", content="{{ site.configs.google_site_verification }}")
         if site.configs.baidu_site_verification

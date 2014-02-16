@@ -435,6 +435,13 @@
                                 "default_value": "no"
                             },
                             {
+                                "key": "black_mode",
+                                "title": "Switch to black style.", // 我的英语实在很渣
+                                "title_zh_cn": "切换到黑色调页面",
+                                "model": "check",
+                                "default_value": "no"
+                            },
+                            {
                                 "key": "enable_twitter_cards",
                                 "title": "Enable Twitter Cards.",
                                 "title_zh_cn": "启用Twitter Cards",
