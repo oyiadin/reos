@@ -1,5 +1,5 @@
 if pager.has_next or pager.has_pre
-	div#paginator
+	div#paginator.info
 		if pager.has_pre
 			span
 				a(href="{{ pager.pre_page_url }}")= "&lt; 上一页 "

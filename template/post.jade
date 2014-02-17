@@ -60,4 +60,16 @@ block content
 
             div#eof(title="End Of File") /* EOF */
 
+            div#paginator.info
+                div.pull-left
+                    if pre_one
+                        a(href="{{ pre_one.url }}", title="{{ pre_one.date }}")= "&lt; " + pre_one.title
+                    else
+                        span 已经是第一篇了
+                div.pull-right
+                    if next_one
+                        a(href="{{ next_one.url }}", title="{{ next_one.date }}")= next_one.title + " &gt;"
+                    else
+                        span 已经是最后一篇了
+
         include include/comments

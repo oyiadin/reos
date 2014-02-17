@@ -8,12 +8,18 @@ header, #paginator, #site-footer {
     text-align: center;
 }
 #paginator {
-    padding-botoom: 0.2em;
+    overflow: hidden;
+}
+#paginator .pull-left, #paginator .pull-right {
+    width: 50%;
 }
 #site-title {
     margin: 1.2em 0;
 }
 
+#comments {
+    padding-top: 0.3em;
+}
 #comments, .comment {
     overflow: hidden;
 }
