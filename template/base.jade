@@ -22,6 +22,9 @@ html
         if site.configs.baidu_site_verification
             meta(name="baidu-site-verification", content="{{ site.configs.baidu_site_verification }}")
 
+        if site.configs.noindex == True
+            meta(name="robots", content="noindex")
+
     body
         div#main-container
             header#site-header

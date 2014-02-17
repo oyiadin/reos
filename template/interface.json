@@ -442,6 +442,13 @@
                                 "default_value": "no"
                             },
                             {
+                                "key": "noindex",
+                                "title": "Disallow the robots (like Googlebot) to index this website.",
+                                "title_zh_cn": "禁止机器人(比如Googlebot)对此网站进行索引",
+                                "model": "check",
+                                "default_value": "no"
+                            },
+                            {
                                 "key": "enable_twitter_cards",
                                 "title": "Enable Twitter Cards.",
                                 "title_zh_cn": "启用Twitter Cards",
