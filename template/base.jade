@@ -81,12 +81,13 @@ html
                         a(href="https://github.com/oyiadin/reos", target="_blank") 模板源码
                         |  /
                         a(href="/template", rel="nofollow", target="_blank") 克隆主题
-                        |  / 
-                        a(href="/admin", rel="nofollow", target="_blank") 网站管理
-                        |  /
-                        a(href="/service/status", rel="nofollow", target="_blank") 网站状态
-                        |  /
-                        a(href="/admin/editor", rel="nofollow", target="_blank") 写文章
+                        if request.is_login
+                            |  /
+                            a(href="/admin", rel="nofollow", target="_blank") 网站管理
+                            |  /
+                            a(href="/service/status", rel="nofollow", target="_blank") 网站状态
+                            |  /
+                            a(href="/admin/editor", rel="nofollow", target="_blank") 写文章
                         |  }
                     p
                         | 本站点由 
