@@ -7,7 +7,6 @@
 * **本主题只适用于目前的 FarBox Beta 版本**；
 * [通过 HTML5 网页规范性测试](http://validator.w3.org/check?uri=oyiadin.farbox.com)（请无视百度站长验证那个谢谢）；
 * 支持移动终端（细节问题尚待解决）；
-* 无 JavaScript 脚本（不计第三方应用）；
 * 支持评论系统：
     * [Disqus](http://disqus.com/)
     * [多说](http://duoshuo.com/)

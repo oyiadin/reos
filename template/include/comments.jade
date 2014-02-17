@@ -35,7 +35,7 @@ else
                    img(src="/service/static_3rd/avatar/{{ comment.email_md5 }}?s=80")
                div.comment_info
                    span.comment_author
-                       a(href="{{ comment.site or '#' }}")
+                       a(href="{{ comment.site or '#comments' }}")
                            strong= comment.author
                    span.comment_date= comment.date.format(" %Y-%m-%d %H:%M:%S")
                div.comment_content= comment.content
@@ -49,7 +49,46 @@ else
                 p
                     strong= error
 
-           input(type="text", name="email", placeholder="邮箱(必需)")
-           input(type="text", name="author", placeholder="称呼(可选)")
-           input(type="text", name="site", placeholder="网站(可选)")
-           input(type="submit", value="提交")
+           input(type="text", id="new_email", name="email", placeholder="邮箱(必需)")
+           input(type="text", id="new_author", name="author", placeholder="称呼(可选)")
+           input(type="text", id="new_site", name="site", placeholder="网站(可选)")
+           input(type="submit", value="提交", onclick="save_information();")
+
+        script(type="text/javascript").
+            // 源码是 CoffeeScript 写的，然后人工改了几行 ;-)
+            var save_information, load_information, _ref;
+            _ref = ["new_email", "new_author", "new_site"];
+
+            save_information = function() {
+              var ele, ele_id, expires_date, _i, _len;
+              for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                ele_id = _ref[_i];
+                ele = document.getElementById(ele_id);
+                if (ele.value) {
+                  expires_date = new Date();
+                  expires_date.setDate(expires_date.getDate() + 30);
+                  expires_date = expires_date.toGMTString();
+
+                  document.cookie = ele_id + "=" + escape(ele.value) + ";expires=" + expires_date;
+                }
+              }
+            };
+
+            load_information = function() {
+              var ele, ele_id, end, start, _i, _len;
+              for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                ele_id = _ref[_i];
+                ele = document.getElementById(ele_id);
+                start = document.cookie.indexOf(ele_id + "=");
+                if (start !== -1) {
+                  start += ele_id.length + 1;
+                  end = document.cookie.indexOf(";", start);
+                  if (end === -1) {
+                    end = document.cookie.length;
+                  }
+                  ele.value = unescape(document.cookie.substring(start, end));
+                }
+              }
+            };
+
+            load_information();
