@@ -4,6 +4,11 @@
     margin: 0 auto;
     padding: 0 5%;
 }
+@media screen and (min-width:1300px) {
+    #main-container {
+        max-width: 1000px;
+    }
+}
 header, #paginator, #site-footer {
     text-align: center;
 }
@@ -77,5 +82,13 @@ header, #paginator, #site-footer {
             margin-right: 0;
             display: block;
         }
+    }
+}
+
+
+
+@media screen and (orientation:landscape) {
+    #site-title {
+        margin: 1em 0;
     }
 }
