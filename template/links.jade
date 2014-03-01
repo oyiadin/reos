@@ -2,7 +2,7 @@ if not (has('links.md') or has('links.txt'))
     raise_404()
 else
     post = get_doc('links.md') or get_doc('links.txt')
-    add_doc_action(post)
+    add_doc_actions(post)
 
 extends base
 

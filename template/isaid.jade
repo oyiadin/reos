@@ -1,10 +1,11 @@
 extends base
-{% from 'cache_macros' import cache_render_comments %}
 
 post = get_doc('isaid.md') or get_doc('isaid.txt')
 
 if not post
-	+raise_404()
+    raise_404()
+else
+    add_doc_actions(post)
 
 title = post.metadata.title or '我在说'
 
@@ -14,17 +15,32 @@ block title
 block title_h1
 
 block content
-	article
+    article
         header#header
             h1#title
                 a(href="#title")= title
 
-            p#date.info= post.date.format("/* last updated: %b %d, %Y(%a) %H:%M */")
-
         div#content
-            post.content
+            if post.content
+                div= post.content
+
+            for comment in get_comments(post)
+                id = 'message-' + comment.date.format("%Y-%m-%d-%H-%M-%S")
+                div(id=id)
+                    br
+                    a.info(href='#'+id, style='margin-right:0.5em;')= comment.date
+                    {{ comment.content }}
 
         footer#footer
             div#eof(title="End Of File") /* EOF */
 
-        +cache_render_comments(post)
+            if request.is_admin
+                p 说句新的：
+                form(method="post", action="/post/isaid#comments")
+                    textarea(name="content", rows="10", placeholder="内容(不少于5字)")= comment_content
+        
+                    if error
+                         p
+                             strong= error
+
+                    input(type="submit", value="提交")

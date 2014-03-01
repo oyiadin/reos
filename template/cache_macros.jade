@@ -115,7 +115,7 @@ mixin cache_render_comments(post)
                        span.comment_author
                            a(href="{{ comment.site or '#comments' }}")
                                strong= comment.author
-                       span.comment_date= comment.date.format(" %Y-%m-%d %H:%M:%S")
+                       span.comment_date= comment.date
                    div.comment_content= comment.content
     
        if comment_allowed
