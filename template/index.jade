@@ -1,5 +1,7 @@
 ﻿extends base
 
+{% from 'cache_macros' import cache_render_pager %}
+
 block title
     | 主页
 
@@ -25,4 +27,4 @@ block content
 
         hr
 
-    include include/pager
+    +cache_render_pager(pager)

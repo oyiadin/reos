@@ -1,5 +1,7 @@
 extends base
 
+{% from 'cache_macros' import cache_render_comments %}
+
 block title
     post.title
 
@@ -12,11 +14,9 @@ block meta
         meta(name="twitter:title", content="{{ post.title }}")
         meta(name="twitter:description", content="
             {% if not post.metadata.password %}
-            {{ post.content[0:202] }}
+            {{ post.content[0:250] }}
             {% else %}访问该文章需要密码验证。
             {% endif %}")
-        //- Twitter Cards 对内容的限制是 200 字
-        //- 取 202 只是为了让 Twiiter 自己处理内容溢出的效果。
 
         if site.configs.twitter
             meta(name="twitter:creator", content="{{ site.configs.twitter }}")
@@ -32,10 +32,9 @@ block content
         header#header
             h1#title
                 a(href="#title")
-                    if not post.metadata.password
-                        post.title
-                    else
-                        | 密码保护：{{ post.title }}
+                    if post.metadata.password
+                        | 密码保护：
+                    post.title
                     
 
             p#date.info= post.date.format("/* %b %d, %Y(%a) %H:%M */")
@@ -72,4 +71,4 @@ block content
                     else
                         span 已经是最后一篇了
 
-        include include/comments
+        +cache_render_comments()

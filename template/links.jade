@@ -2,8 +2,11 @@ if not (has('links.md') or has('links.txt'))
     raise_404()
 else
     post = get_doc('links.md') or get_doc('links.txt')
+    add_doc_action(post)
 
 extends base
+
+{% from 'cache_macros' import cache_render_comments %}
 
 block title
     | 友情链接
@@ -21,3 +24,5 @@ block content
             include include/show_content
             //- 本来想在 links.md 里不管加密的=。=
             //- 最后想，算了，加就加~
+
+        +cache_render_comments()

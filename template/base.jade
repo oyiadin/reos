@@ -1,5 +1,7 @@
 doctype html
 
+{% from 'cache_macros' import cache_render_nav, cache_render_footer %}
+
 html
     head
         title
@@ -40,64 +42,8 @@ html
                 if site.content
                     site.content
 
-                nav
-                    div
-                        | { 
-                        if has('posts')
-                            a(href="/archive") 归档
-                            |  /
-                        if site.tags
-                            a(href="/tags") 标签云
-                            |  /
-                        if has('images')
-                            a(href="/album") 相册
-                            |  /
-                        if has('about.md') or has('about.txt')
-                            a(href="/post/about") 关于
-                            |  /
-                        if has('links.md') or has('links.txt')
-                            a(href="/links") 友链
-                            |  /
-                        a(href="/feed") 订阅
-                        |  }
-                    div
-                        | { 
-                        keys = ['github', 'twitter', 'weibo']
-                        for one_key in keys
-                            if site.configs[one_key]
-                                a(target="_blank", href="http://{{ one_key }}.com/{{ site.configs[one_key] }}")= one_key|capitalize
-                                //- 暂时找不到更优雅的写法
-                                if not one_key == keys[-1]
-                                    |  /
-                        |  }
+                +cache_render_nav()
 
             block content
 
-            footer#site-footer
-                footer = get_doc('footer.md') or get_doc('footer.txt')
-                if not footer
-                    p
-                        | { 
-                        a(href="https://github.com/oyiadin/reos", target="_blank") 模板源码
-                        |  /
-                        a(href="/template", rel="nofollow", target="_blank") 克隆主题
-                        if request.is_login
-                            |  /
-                            a(href="/admin", rel="nofollow", target="_blank") 网站管理
-                            |  /
-                            a(href="/service/status", rel="nofollow", target="_blank") 网站状态
-                            |  /
-                            a(href="/admin/editor", rel="nofollow", target="_blank") 写文章
-                        |  }
-                    p
-                        | 本站点由 
-                        a(href="http://farbox.com", target="_blank") FarBox
-                        |  强力驱动
-                        if site.configs.author
-                            | ；由 {{ site.configs.author }} 倾情撰写
-                        | 。
-                else
-                    {{ footer.raw_content }}
-
-                site.comment_script
-                //- comment_js.txt 的内容
+            +cache_render_footer()

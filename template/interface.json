@@ -191,25 +191,11 @@
                         "parts_per_line": 1,
                         "parts": [
                             {
-                                "key": "comment_system",
-                                "title": "Choose a comment system",
-                                "title_zh_cn": "选择一个评论系统",
-                                "default_value": "farbox original",
-                                "model": "select",
-                                "options": [
-                                    {
-                                        "value": "farbox original",
-                                        "title": "FarBox original"
-                                    },
-                                    {
-                                        "value": "disqus",
-                                        "title": "Disqus"
-                                    },
-                                    {
-                                        "value": "duoshuo",
-                                        "title": "Duoshuo"
-                                    }
-                                ]
+                                "key": "disable_original_comment_system",
+                                "title": "Check if you want to disable the FarBox original comment system.",
+                                "title_zh_cn": "选中以关闭FarBox原生评论系统",
+                                "model": "check",
+                                "default_value": "no"
                             }
                         ]
                     },

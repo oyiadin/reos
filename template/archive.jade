@@ -1,5 +1,7 @@
 extends base
 
+{% from 'cache_macros' import cache_render_pager %}
+
 block title
     | 归档
 
@@ -23,4 +25,4 @@ block content
                     {{ post.date.format("%Y-%m-%d") }}
                     a(href="{{ post.url }}")= post.title
 
-    include include/pager
+    +cache_render_pager(pager)

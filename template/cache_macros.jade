@@ -1,0 +1,170 @@
+mixin cache_render_nav()
+    nav
+        div
+            | { 
+            if has('posts')
+                a(href="/archive") 归档
+                |  /
+            if site.tags
+                a(href="/tags") 标签云
+                |  /
+            if has('images')
+                a(href="/album") 相册
+                |  /
+            if has('about.md') or has('about.txt')
+                a(href="/post/about") 关于
+                |  /
+            if has('links.md') or has('links.txt')
+                a(href="/links") 友链
+                |  /
+            a(href="/feed") 订阅
+            |  }
+
+        div
+            | { 
+            keys = ['github', 'twitter', 'weibo']
+            for one_key in keys
+                if site.configs[one_key]
+                    a(target="_blank", href="{{ site.configs[one_key] }}")= one_key|capitalize
+                    if not one_key == keys[-1]
+                        |  /
+            |  }
+
+mixin cache_render_footer()
+    footer#site-footer
+        footer = get_doc('footer.md') or get_doc('footer.txt')
+        if not footer
+            p
+                | { 
+                a(href="https://github.com/oyiadin/reos", target="_blank") 模板源码
+                |  /
+                a(href="/template", rel="nofollow", target="_blank") 克隆主题
+                |  /
+                a(href="/admin", rel="nofollow", target="_blank") 网站管理
+                |  /
+                a(href="/service/status", rel="nofollow", target="_blank") 网站状态
+                |  /
+                a(href="/admin/editor", rel="nofollow", target="_blank") 写文章
+                |  }
+
+            p
+                | 本站点由 
+                a(href="http://farbox.com", target="_blank") FarBox
+                |  强力驱动
+                if site.configs.author
+                    | ；由 {{ site.configs.author }} 倾情撰写
+                | 。
+        else
+            {{ footer.raw_content }}
+
+        site.comment_script
+        //- comment_js.txt 的内容
+
+mixin cache_render_pager(pager)
+    if pager.has_next or pager.has_pre
+        div#paginator.info
+            if pager.has_pre
+                span
+                    a(href="{{ pager.pre_page_url }}")= "&lt; 上一页 "
+            span 共 {{ pager.total_pages }} 页
+            if pager.has_next
+                span
+                    a(href="{{ pager.next_page_url }}")= " 下一页 &gt;"
+
+mixin cache_render_comments()
+    if site.configs.disqus
+       div#disqus_thread
+       script(type="text/javascript").
+           /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+           var disqus_shortname = '{{ site.configs.disqus }}';
+           /* * * DON'T EDIT BELOW THIS LINE * * */
+           (function() {
+               var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+               dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+               (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+       noscript Please enable JavaScript to view the
+           a(href="http://disqus.com/?ref_noscript") comments powered by Disqus.
+       a.dsq-brlink(href="http://disqus.com") comments powered by
+           span.logo-disqus  Disqus
+    
+    if site.configs.duoshuo
+       div.ds-thread
+       script(type="text/javascript").
+           var duoshuoQuery = {short_name:"{{ site.configs.duoshuo }}"};
+           (function() {
+               var ds = document.createElement('script');
+               ds.type = 'text/javascript';ds.async = true;
+               ds.src = 'http://static.duoshuo.com/embed.js';
+               ds.charset = 'UTF-8';
+               (document.getElementsByTagName('head')[0] 
+               || document.getElementsByTagName('body')[0]).appendChild(ds);
+           })();
+    
+    if not site.config.disable_original_comment_system == True
+       section#comments
+           for comment in get_comments(post)
+               div.comment
+                   span.comment_avatar
+                       img(src="/service/static_3rd/avatar/{{ comment.email_md5 }}?s=80")
+                   div.comment_info
+                       span.comment_author
+                           a(href="{{ comment.site or '#comments' }}")
+                               strong= comment.author
+                       span.comment_date= comment.date.format(" %Y-%m-%d %H:%M:%S")
+                   div.comment_content= comment.content
+    
+       if comment_allowed
+           //- 表单的 POST 应该发到文章本页。
+           form(method="post", action="#comments")
+               textarea(name="content", rows="10", placeholder="评论内容 (必须在 5 字以上)")= comment_content
+    
+               if error
+                    p
+                        strong= error
+    
+               input(type="text", id="new_email", name="email", placeholder="邮箱(必需)")
+               input(type="text", id="new_author", name="author", placeholder="称呼(可选)")
+               input(type="text", id="new_site", name="site", placeholder="网站(可选)")
+               input(type="submit", value="提交", onclick="save_information();")
+    
+            script(type="text/javascript").
+                // 源码是 CoffeeScript 写的，然后人工改了几行 ;-)
+                // 这段代码会将评论者的信息保存到Cookies里
+                // 并在下次访问文章页时读取并自动写入对应的输入框
+                var save_information, load_information, _ref;
+                _ref = ["new_email", "new_author", "new_site"];
+    
+                save_information = function() {
+                  var ele, ele_id, expires_date, _i, _len;
+                  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                    ele_id = _ref[_i];
+                    ele = document.getElementById(ele_id);
+                    if (ele.value) {
+                      expires_date = new Date();
+                      expires_date.setDate(expires_date.getDate() + 30);
+                      expires_date = expires_date.toGMTString();
+    
+                      document.cookie = ele_id + "=" + escape(ele.value) + ";expires=" + expires_date;
+                    }
+                  }
+                };
+    
+                load_information = function() {
+                  var ele, ele_id, end, start, _i, _len;
+                  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                    ele_id = _ref[_i];
+                    ele = document.getElementById(ele_id);
+                    start = document.cookie.indexOf(ele_id + "=");
+                    if (start !== -1) {
+                      start += ele_id.length + 1;
+                      end = document.cookie.indexOf(";", start);
+                      if (end === -1) {
+                        end = document.cookie.length;
+                      }
+                      ele.value = unescape(document.cookie.substring(start, end));
+                    }
+                  }
+                };
+    
+                load_information();
