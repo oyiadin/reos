@@ -37,11 +37,11 @@ urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
         url
             loc= "http://" + site.domain + "/album"
             lastmod
-                {{ get_date(type='image')[0].date.format(date_format) }}
+                // 等待补充
             changefreq monthly
             priority 1.0
 
-    isaid = has('isaid.md') or has('isaid.txt')
+    isaid = get_doc('isaid.md') or get_doc('isaid.txt')
     if isaid
         url
             loc= "http://" + site.domain + "/isaid"
@@ -50,7 +50,7 @@ urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
             changefreq monthly
             priority 1.0
 
-    about = has('about.md') or has('about.txt')
+    about = get_doc('about.md') or get_doc('about.txt')
     if about
         url
             loc= "http://" + site.domain + "/about"
@@ -59,7 +59,7 @@ urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
             changefreq monthly
             priority 1.0
 
-    links = has('links.md') or has('links.txt')
+    links = get_doc('links.md') or get_doc('links.txt')
     if links
         url
             loc= "http://" + site.domain + "/links"
