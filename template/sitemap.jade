@@ -2,7 +2,7 @@ doctype xml
 
 set_content_type('text/xml')
 date_format = "%Y-%m-%dT%H:%M:%S+00:00"
-posts = get_data(type="post", status='all', limit=300)
+posts = get_data(type="post", status=['public', 'secret'], limit=300)
 
 //
     This is a XML sitemap file. Which is supported by many search engines like Google.
@@ -11,15 +11,66 @@ posts = get_data(type="post", status='all', limit=300)
 
 urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     url
-        loc= "//" + site.domain
+        loc= "http://" + site.domain
         lastmod
             {{ posts[0].date.format(date_format) }}
         changefreq weekly
         priority 1.0
 
+    if has('posts')
+        url
+            loc= "http://" + site.domain + "/archive"
+            lastmod
+                {{ posts[0].date.format(date_format) }}
+            changefreq monthly
+            priority 1.0
+
+    if site.tags
+        url
+            loc= "http://" + site.domain + "/tags"
+            lastmod
+                {{ posts[0].date.format(date_format) }}
+            changefreq monthly
+            priority 1.0
+
+    if has('images')
+        url
+            loc= "http://" + site.domain + "/album"
+            lastmod
+                {{ get_date(type='image')[0].date.format(date_format) }}
+            changefreq monthly
+            priority 1.0
+
+    isaid = has('isaid.md') or has('isaid.txt')
+    if isaid
+        url
+            loc= "http://" + site.domain + "/isaid"
+            lastmod
+                {{ get_comments(isaid)[0].date }}
+            changefreq monthly
+            priority 1.0
+
+    about = has('about.md') or has('about.txt')
+    if about
+        url
+            loc= "http://" + site.domain + "/about"
+            lastmod
+                {{ about.date.format(date_format) }}
+            changefreq monthly
+            priority 1.0
+
+    links = has('links.md') or has('links.txt')
+    if links
+        url
+            loc= "http://" + site.domain + "/links"
+            lastmod
+                {{ links.date.format(date_format) }}
+            changefreq monthly
+            priority 1.0
+
     for post in posts
         url
-            loc= "//" + site.domain + post.url
+            loc= "http://" + site.domain + post.url
             lastmod
                 {{ post.date.format(date_format) }}
             changefreq monthly
@@ -28,7 +79,7 @@ urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     for tag in site.tags
         //- tag: [tag_name, tag_count]
         url
-            loc= "//" + site.domain + "/tag/" + tag[0]
+            loc= "http://" + site.domain + "/tag/" + tag[0]
             lastmod
                 {{ posts[0].date.format(date_format) }}
                 //- 取得被打上 tag_name 的最新文章的发表时间
