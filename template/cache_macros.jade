@@ -11,6 +11,10 @@ mixin cache_render_nav()
             if has('images')
                 a(href="/album") 相册
                 |  /
+            isaid = has('isaid.md') or has('isaid.txt')
+            if isaid
+                a(href='/isaid')= isaid.title or '我在说'
+                |  /
             if has('about.md') or has('about.txt')
                 a(href="/post/about") 关于
                 |  /

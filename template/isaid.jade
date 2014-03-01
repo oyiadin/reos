@@ -1,0 +1,30 @@
+extends base
+{% from 'cache_macros' import cache_render_comments %}
+
+post = get_doc('isaid.md') or get_doc('isaid.txt')
+
+if not post
+	+raise_404()
+
+title = post.metadata.title or '我在说'
+
+block title
+    {{ title }}
+
+block title_h1
+
+block content
+	article
+        header#header
+            h1#title
+                a(href="#title")= title
+
+            p#date.info= post.date.format("/* last updated: %b %d, %Y(%a) %H:%M */")
+
+        div#content
+            post.content
+
+        footer#footer
+            div#eof(title="End Of File") /* EOF */
+
+        +cache_render_comments(post)
