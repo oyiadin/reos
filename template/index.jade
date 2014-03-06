@@ -2,6 +2,13 @@
 
 {% from 'cache_macros' import cache_render_pager %}
 
+block meta
+    if site.configs.google_site_verification
+        meta(name="google-site-verification", content="{{ site.configs.google_site_verification }}")
+    if site.configs.baidu_site_verification
+        <meta name="baidu-site-verification" content="{{ site.configs.baidu_site_verification }}" />
+        //- 死百度，后面差个空格和结束标记就不给过的……
+
 block title
     | 主页
 
