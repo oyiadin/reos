@@ -543,7 +543,7 @@
 
     },
     {
-        "title": "Bind",
+        "title": "Domain",
         "title_zh_cn": "域名",
         "groups":[
             {
@@ -580,8 +580,24 @@
                         ]
                     }
                 ]
+            },
+            {
+                "title": "Main Domain",
+                "title_zh_cn": "主域名",
+                "cells": [
+                    {
+                        "parts_per_line": 1,
+                        "parts": [
+                            {
+                                "key": "redirect_domain",
+                                "title": "It will redirect to the main domain automatically if you browse a domain isn't that one.",
+                                "title_zh_cn": "如果你访问的域名不是该主域名的话，它会被强制重定向到主域名。",
+                                "model": "text"
+                            }
+                        ]
+                    }
+                ]
             }
-
         ]
     }
 ]

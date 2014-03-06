@@ -2,6 +2,9 @@ doctype html
 
 {% from 'cache_macros' import cache_render_nav, cache_render_footer %}
 
+if site.configs.redirect_domain and not request.host == site.configs.redirect_domain
+    +redirect('http://' + site.configs.redirect_domain + request.url_without_host)
+
 html
     head
         title
