@@ -24,31 +24,47 @@ mixin cache_render_nav()
             a(href="/feed") 订阅
             |  }
 
-        div
-            | { 
-            keys = ['github', 'twitter', 'weibo']
-            for one_key in keys
-                if site.configs[one_key]
-                    a(target="_blank", href="{{ site.configs[one_key] }}")= one_key|capitalize
-                    if not one_key == keys[-1]
-                        |  /
-            |  }
-
 mixin cache_render_footer()
     footer#site-footer
+        div
+            added_start = False
+            need_end = False
+            any_before = False
+            keys = ['github', 'twitter', 'weibo', 'facebook', 'instagram', 'quora']
+
+            for key in keys
+                if site.configs[key]
+                    if not added_start
+                        | {
+                        added_start = True
+                        need_end = True
+
+                    if any_before
+                        |  /
+
+                    any_before = True
+
+                    a(target="_blank", href=site.configs[key])= key|capitalize
+
+                if key == keys[-1] and need_end
+                    |  }
+
+            //- 代码实在不优雅 Orz
+
         footer = get_doc('footer.md') or get_doc('footer.txt')
         if not footer
             p
+                tip = 'Need admin permission'
                 | { 
                 a(href="https://github.com/oyiadin/reos", target="_blank") 模板源码
                 |  /
                 a(href="/template", rel="nofollow", target="_blank") 克隆主题
                 |  /
-                a(href="/admin", rel="nofollow", target="_blank") 网站管理
-                |  /
                 a(href="/service/status", rel="nofollow", target="_blank") 网站状态
                 |  /
-                a(href="/admin/editor", rel="nofollow", target="_blank") 写文章
+                a(href="/admin", rel="nofollow", target="_blank", title=tip) 网站管理
+                |  /
+                a(href="/admin/editor", rel="nofollow", target="_blank", title=tip) 写文章
                 |  }
 
             p
