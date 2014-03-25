@@ -184,8 +184,8 @@
 
             },
             {
-                "title":"Comment System",
-                "title_zh_cn":"评论系统",
+                "title": "Social Comments",
+                "title_zh_cn": "第三方评论系统",
                 "cells":[
                     {
                         "parts_per_line": 1,
@@ -201,17 +201,17 @@
                     },
                     {
                         "parts_per_line": 2,
-                        "parts":[
+                        "parts": [
                             {
                                 "key": "disqus",
                                 "title": "Disqus",
-                                "default_value": "Your `disqus_shortname`"
+                                "default_value": "Disqus Shortname"
                             },
                             {
                                 "key": "duoshuo",
-                                "title": "Duoshuo",
+                                "title": "DuoShuo",
                                 "title_zh_cn": "多说",
-                                "default_value": "Your `duoshuo_shortname`"
+                                "default_value": "Duoshuo ID"
                             }
                         ]
                     }
@@ -227,33 +227,33 @@
                             {
                                 "key": "twitter",
                                 "title": "Twitter",
-                                "default_value": "Twitter ID"
+                                "default_value": "Twitter Homepage URL"
                             },
                             {
                                 "key": "weibo",
                                 "title": "Weibo",
                                 "title_zh_cn": "微博",
-                                "default_value": "Weibo ID"
+                                "default_value": "Weibo Homepage URL"
                             },
                             {
                                 "key": "facebook",
                                 "title": "Facebook",
-                                "default_value": "Facebook ID"
+                                "default_value": "Facebook Homepage URL"
                             },
                             {
                                 "key": "instagram",
                                 "title": "Instagram",
-                                "default_value": "Instagram Username"
+                                "default_value": "Instagram Homepage URL"
                             },
                             {
                                 "key": "quora",
                                 "title": "Quora",
-                                 "default_value": "Quora Username"
+                                 "default_value": "Quora Homepage URL"
                             },
                             {
                                 "key": "github",
                                 "title": "Github",
-                                "default_value": "Github ID"
+                                "default_value": "Github Homepage URL"
                             }
                         ]
                     }
@@ -277,15 +277,11 @@
                                 "title": "Template Priority",
                                 "title_zh_cn": "模板优先级",
                                 "model": "select",
-                                "default_value": "package",
+                                "default_value": "auto",
                                 "options": [
                                     {
-                                        "value": "package",
-                                        "title": "Template Package"
-                                    },
-                                    {
-                                        "value": "clone",
-                                        "title": "Cloned Template"
+                                        "value": "auto",
+                                        "title": "Auto"
                                     },
                                     {
                                         "value": "self",
@@ -298,12 +294,8 @@
                                 ],
                                 "options_zh_cn": [
                                     {
-                                        "value": "package",
-                                        "title": "模板包"
-                                    },
-                                    {
-                                        "value": "clone",
-                                        "title": "克隆的模板"
+                                        "value": "auto",
+                                        "title": "自动"
                                     },
                                     {
                                         "value": "self",
@@ -341,8 +333,34 @@
                                         "title": "不继承"
                                     }
                                 ]
+                            },
+                            {
+                                "key": "template_clone_allowed",
+                                "title": "Allow Template Clone",
+                                "title_zh_cn": "允许模板克隆",
+                                "model": "select",
+                                "default_value": "yes",
+                                "options": [
+                                    {
+                                        "value": "yes",
+                                        "title": "Allow Others Clone Template!"
+                                    },
+                                    {
+                                        "value": "no",
+                                        "title": "No Allowed"
+                                    }
+                                ],
+                                "options_zh_cn": [
+                                    {
+                                        "value": "yes",
+                                        "title": "允许别人克隆模板"
+                                    },
+                                    {
+                                        "value": "no",
+                                        "title": "不允许"
+                                    }
+                                ]
                             }
-
                         ]
                     }
                 ]
@@ -407,16 +425,9 @@
                         "parts_per_line": 1,
                         "parts":[
                             {
-                                "key": "live",
-                                "title": "Make my site auto reload & preview in realtime (in next 10 minutes).",
-                                "title_zh_cn": "让我的网站保持实时更新预览（有效时间为10分钟）",
-                                "model":"check",
-                                "default_value": "no"
-                            },
-                            {
-                                "key": "no_editor",
-                                "title": "Disable the Editor which one make you write directly on the Web Page",
-                                "title_zh_cn": "禁用`可直接在页面中书写的编辑器`",
+                                "key": "nano",
+                                "title": "<small>beta</small> Join Nano Network, Make Web Fast. <a href='http://status.farbox.org/service/nano-network' target=_blank> status </a>",
+                                "title_zh_cn": "<small>beta</small> 加入Nano Network, 加速你的网站. <a href='http://status.farbox.org/service/nano-network' target=_blank> status </a>",
                                 "model":"check",
                                 "default_value": "no"
                             },
@@ -591,7 +602,7 @@
                             {
                                 "key": "redirect_domain",
                                 "title": "It will redirect to the main domain automatically if you browse a domain isn't that one.",
-                                "title_zh_cn": "如果你访问的域名不是该主域名的话，它会被强制重定向到主域名。",
+                                "title_zh_cn": "如果你访问的域名不是该主域名，它会被强制重定向到主域名。",
                                 "model": "text"
                             }
                         ]
