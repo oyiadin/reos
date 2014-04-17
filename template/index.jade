@@ -3,6 +3,9 @@
 {% from 'cache_macros' import cache_render_pager %}
 
 block meta
+    if site.configs.keywords
+        meta(name="keywords", content=site.configs.keywords)
+
     if site.configs.google_site_verification
         meta(name="google-site-verification", content="{{ site.configs.google_site_verification }}")
     if site.configs.baidu_site_verification

@@ -25,6 +25,12 @@
                                 "model": "text"
                             },
                             {
+                                "title": "Site Keywords",
+                                "title_zh_cn": "网站关键词",
+                                "key": "keywords",
+                                "model":"text"
+                            },
+                            {
                                 "key": "avatar",
                                 "title": "Site Avatar (drag image here to replace)",
                                 "title_zh_cn": "网站头像 (拖入图片替换)",
@@ -102,8 +108,12 @@
                                         "title": "No indent"
                                     },
                                     {
+                                        "value": "hard",
+                                        "title": "2 Letters Indent Every Line"
+                                    },
+                                    {
                                         "value": "yes",
-                                        "title": "2 Letters Indent"
+                                        "title": "2 Letters Indent Every Paragraph"
                                     }
                                 ],
                                 "options_zh_cn": [
@@ -112,8 +122,12 @@
                                         "title": "不缩进"
                                     },
                                     {
+                                        "value": "hard",
+                                        "title": "每行缩进2字"
+                                    },
+                                    {
                                         "value": "yes",
-                                        "title": "缩进2字"
+                                        "title": "每段缩进2字"
                                     }
                                 ]
                             },
@@ -360,6 +374,49 @@
                                         "title": "不允许"
                                     }
                                 ]
+                            },
+                            {
+                                "key": "autoreload",
+                                "title": "AutoReload",
+                                "title_zh_cn": "AutoReload",
+                                "model": "select",
+                                "default_value": "auto",
+                                "options": [
+                                    {
+                                        "value": "auto",
+                                        "title": "Auto"
+                                    },
+                                    {
+                                        "value": "admin",
+                                        "title": "For Yourself Only"
+                                    },
+                                    {
+                                        "value": "yes",
+                                        "title": "For Everyone"
+                                    },
+                                    {
+                                        "value": "no",
+                                        "title": "Not Allowed"
+                                    }
+                                ],
+                                "options_zh_cn": [
+                                    {
+                                        "value": "auto",
+                                        "title": "自动"
+                                    },
+                                    {
+                                        "value": "admin",
+                                        "title": "仅自己"
+                                    },
+                                    {
+                                        "value": "yes",
+                                        "title": "每个访客都有效"
+                                    },
+                                    {
+                                        "value": "no",
+                                        "title": "不允许"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -587,23 +644,6 @@
                                 "title_zh_cn": "每行一条需绑定的域名，最多不超过10条",
                                 "model":"textarea",
                                 "is_list": true
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "Main Domain",
-                "title_zh_cn": "主域名",
-                "cells": [
-                    {
-                        "parts_per_line": 1,
-                        "parts": [
-                            {
-                                "key": "redirect_domain",
-                                "title": "It will redirect to the main domain automatically if you browse a domain isn't that one.",
-                                "title_zh_cn": "如果你访问的域名不是该主域名，它会被强制重定向到主域名。",
-                                "model": "text"
                             }
                         ]
                     }
